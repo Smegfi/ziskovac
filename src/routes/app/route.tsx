@@ -2,9 +2,20 @@ import { AppSidebar } from "@/components/layouts/page/app-sidebar"
 import { SiteHeader } from "@/components/layouts/page/site-header"
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
 import { TooltipProvider } from "@/components/ui/tooltip"
-import { createFileRoute, Outlet } from "@tanstack/react-router"
+import { createFileRoute, Outlet, redirect } from "@tanstack/react-router"
+import { getSession } from "@/lib/session.server"
 
 export const Route = createFileRoute("/app")({
+  beforeLoad: async ({ location }) => {
+    const session = await getSession()
+    if (!session) {
+      throw redirect({
+        to: "/login",
+        search: { redirect: location.href },
+      })
+    }
+    return { user: session.user }
+  },
   component: RouteComponent,
 })
 
