@@ -1,10 +1,12 @@
 import { createFileRoute, Link, redirect, useRouter } from "@tanstack/react-router"
 import { useState } from "react"
+import { useTranslation } from "react-i18next"
 import { z } from "zod"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { LanguageSwitcher } from "@/components/ui/language-switcher"
 import { signIn } from "@/lib/auth-client"
 import { getSession } from "@/lib/session.server"
 
@@ -24,6 +26,7 @@ export const Route = createFileRoute("/login")({
 function LoginPage() {
   const { redirect: redirectTo } = Route.useSearch()
   const router = useRouter()
+  const { t } = useTranslation()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState<string | null>(null)
@@ -37,7 +40,7 @@ function LoginPage() {
     const result = await signIn.email({ email, password })
 
     if (result.error) {
-      setError(result.error.message ?? "Login failed")
+      setError(result.error.message ?? t("login.submit"))
       setLoading(false)
       return
     }
@@ -47,18 +50,21 @@ function LoginPage() {
 
   return (
     <div className="flex min-h-svh items-center justify-center p-4">
+      <div className="absolute top-4 right-4">
+        <LanguageSwitcher variant="outline" />
+      </div>
       <Card className="w-full max-w-sm">
         <CardHeader>
-          <CardTitle className="text-xl">Sign in to ZISKovač</CardTitle>
+          <CardTitle className="text-xl">{t("login.title")}</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <div className="flex flex-col gap-1.5">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">{t("login.emailLabel")}</Label>
               <Input
                 id="email"
                 type="email"
-                placeholder="you@example.com"
+                placeholder={t("login.emailPlaceholder")}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -66,11 +72,11 @@ function LoginPage() {
               />
             </div>
             <div className="flex flex-col gap-1.5">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">{t("login.passwordLabel")}</Label>
               <Input
                 id="password"
                 type="password"
-                placeholder="••••••••"
+                placeholder={t("login.passwordPlaceholder")}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -81,13 +87,13 @@ function LoginPage() {
               <p className="text-sm text-destructive">{error}</p>
             )}
             <Button type="submit" disabled={loading} className="w-full">
-              {loading ? "Signing in…" : "Sign in"}
+              {loading ? t("login.submitLoading") : t("login.submit")}
             </Button>
           </form>
           <p className="mt-4 text-center text-sm text-muted-foreground">
-            Don&apos;t have an account?{" "}
+            {t("login.noAccount")}{" "}
             <Link to="/register" className="underline underline-offset-4 hover:text-foreground">
-              Create one
+              {t("login.createOne")}
             </Link>
           </p>
         </CardContent>

@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router"
 import { useEffect, useRef, useState } from "react"
+import { useTranslation } from "react-i18next"
 import { Button } from "@/components/ui/button"
+import { LanguageSwitcher } from "@/components/ui/language-switcher"
 
 export const Route = createFileRoute("/")({ component: LandingPage })
 
@@ -147,6 +149,7 @@ function IllustrationSuccess() {
 // Navbar
 // ---------------------------------------------------------------------------
 function Navbar() {
+  const { t } = useTranslation()
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -155,6 +158,13 @@ function Navbar() {
     window.addEventListener("scroll", handler)
     return () => window.removeEventListener("scroll", handler)
   }, [])
+
+  const navLinks = [
+    { label: t("nav.about"), anchor: "#about" },
+    { label: t("nav.howItWorks"), anchor: "#how-it-works" },
+    { label: t("nav.pricing"), anchor: "#pricing" },
+    { label: t("nav.faq"), anchor: "#faq" },
+  ]
 
   return (
     <nav
@@ -176,27 +186,28 @@ function Navbar() {
 
           {/* Desktop links */}
           <div className="hidden md:flex items-center gap-6">
-            {["About", "How It Works", "Pricing", "FAQ"].map((item) => (
+            {navLinks.map((link) => (
               <a
-                key={item}
-                href={`#${item.toLowerCase().replace(/ /g, "-")}`}
+                key={link.anchor}
+                href={link.anchor}
                 className="text-sm font-medium text-gray-600 hover:text-emerald-600 transition-colors"
               >
-                {item}
+                {link.label}
               </a>
             ))}
           </div>
 
           {/* CTA buttons */}
           <div className="hidden md:flex items-center gap-3">
+            <LanguageSwitcher />
             <Link to="/login">
               <Button variant="ghost" size="sm" className="text-gray-600">
-                Log in
+                {t("nav.login")}
               </Button>
             </Link>
             <Link to="/register">
               <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-white">
-                Get Started Free
+                {t("nav.getStarted")}
               </Button>
             </Link>
           </div>
@@ -221,23 +232,24 @@ function Navbar() {
       {/* Mobile menu */}
       {menuOpen && (
         <div className="md:hidden bg-white border-t border-gray-100 px-4 py-4 flex flex-col gap-3 animate-in slide-in-from-top duration-200">
-          {["About", "How It Works", "Pricing", "FAQ"].map((item) => (
+          {navLinks.map((link) => (
             <a
-              key={item}
-              href={`#${item.toLowerCase().replace(/ /g, "-")}`}
+              key={link.anchor}
+              href={link.anchor}
               className="text-sm font-medium text-gray-700 py-1"
               onClick={() => setMenuOpen(false)}
             >
-              {item}
+              {link.label}
             </a>
           ))}
           <div className="flex flex-col gap-2 pt-2 border-t border-gray-100">
+            <LanguageSwitcher variant="outline" />
             <Link to="/login" onClick={() => setMenuOpen(false)}>
-              <Button variant="outline" size="sm" className="w-full">Log in</Button>
+              <Button variant="outline" size="sm" className="w-full">{t("nav.login")}</Button>
             </Link>
             <Link to="/register" onClick={() => setMenuOpen(false)}>
               <Button size="sm" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white">
-                Get Started Free
+                {t("nav.getStarted")}
               </Button>
             </Link>
           </div>
@@ -251,6 +263,8 @@ function Navbar() {
 // Hero Section
 // ---------------------------------------------------------------------------
 function HeroSection() {
+  const { t } = useTranslation()
+
   return (
     <section
       id="hero"
@@ -268,19 +282,17 @@ function HeroSection() {
         <div className="animate-in fade-in slide-in-from-left duration-700">
           <div className="inline-flex items-center gap-2 bg-emerald-100 text-emerald-700 text-xs font-semibold px-3 py-1 rounded-full mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            Profitability automation for freelancers
+            {t("hero.badge")}
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-6">
-            Stop guessing,
+            {t("hero.headline1")}
             <br />
-            <span className="text-emerald-600">start profiting.</span>
+            <span className="text-emerald-600">{t("hero.headline2")}</span>
           </h1>
 
           <p className="text-lg text-gray-600 leading-relaxed mb-8 max-w-lg">
-            ZISKovač automates the transition from gut-feeling pricing to
-            data-driven profitability. Know your real costs, set the right
-            rates, and generate professional quotes — in minutes.
+            {t("hero.description")}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3">
@@ -289,7 +301,7 @@ function HeroSection() {
                 size="lg"
                 className="bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg shadow-emerald-200 hover:shadow-emerald-300 transition-all hover:-translate-y-0.5"
               >
-                Get Started — It's Free
+                {t("hero.ctaPrimary")}
               </Button>
             </Link>
             <a href="#how-it-works">
@@ -301,7 +313,7 @@ function HeroSection() {
                 <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
                 </svg>
-                See How It Works
+                {t("hero.ctaSecondary")}
               </Button>
             </a>
           </div>
@@ -315,9 +327,12 @@ function HeroSection() {
                 </div>
               ))}
             </div>
-            <p className="text-sm text-gray-500">
-              Join <span className="font-semibold text-gray-700">500+</span> freelancers already profiting
-            </p>
+            <p
+              className="text-sm text-gray-500"
+              dangerouslySetInnerHTML={{
+                __html: t("hero.socialProof").replace("<strong>", '<span class="font-semibold text-gray-700">').replace("</strong>", "</span>"),
+              }}
+            />
           </div>
         </div>
 
@@ -341,27 +356,13 @@ function HeroSection() {
 // About Section
 // ---------------------------------------------------------------------------
 function AboutSection() {
+  const { t } = useTranslation()
   const { ref, visible } = useInView()
 
   const painPoints = [
-    {
-      icon: "💸",
-      title: "Invisible overhead costs",
-      description:
-        "Most freelancers price only their time — ignoring software, taxes, downtime, and equipment.",
-    },
-    {
-      icon: "🤷",
-      title: "Gut-feeling pricing",
-      description:
-        "Quoting from instinct means inconsistent margins. Some projects profit, others quietly lose money.",
-    },
-    {
-      icon: "📉",
-      title: "The profitability gap",
-      description:
-        "You work hard, invoices go out — but your bank account doesn't reflect your effort.",
-    },
+    { icon: "💸", title: t("about.pain1Title"), description: t("about.pain1Desc") },
+    { icon: "🤷", title: t("about.pain2Title"), description: t("about.pain2Desc") },
+    { icon: "📉", title: t("about.pain3Title"), description: t("about.pain3Desc") },
   ]
 
   return (
@@ -381,16 +382,13 @@ function AboutSection() {
           {/* Content */}
           <div className="order-1 lg:order-2">
             <span className="text-emerald-600 font-semibold text-sm uppercase tracking-wider">
-              The Problem
+              {t("about.eyebrow")}
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mt-2 mb-6">
-              The Profitability Gap is real — and it's costing you.
+              {t("about.headline")}
             </h2>
             <p className="text-gray-600 leading-relaxed mb-8">
-              Freelancers and micro-SMEs often feel like they're doing well —
-              staying busy, sending invoices, serving clients. But without
-              proper cost accounting and rate calculation, many unknowingly work
-              at a loss.
+              {t("about.body")}
             </p>
 
             <div className="space-y-5">
@@ -417,38 +415,35 @@ function AboutSection() {
 // How It Works Section
 // ---------------------------------------------------------------------------
 function HowItWorksSection() {
+  const { t } = useTranslation()
   const { ref, visible } = useInView(0.1)
 
   const steps = [
     {
       step: "01",
-      title: "Enter your real costs",
-      description:
-        "Add your monthly overhead: software subscriptions, equipment, taxes, desired salary, and non-billable hours.",
+      title: t("howItWorks.step1Title"),
+      description: t("howItWorks.step1Desc"),
       color: "bg-emerald-50 text-emerald-700",
       border: "border-emerald-200",
     },
     {
       step: "02",
-      title: "Set your hourly rate",
-      description:
-        "ZISKovač calculates the minimum viable rate you need to charge to actually profit — not just survive.",
+      title: t("howItWorks.step2Title"),
+      description: t("howItWorks.step2Desc"),
       color: "bg-teal-50 text-teal-700",
       border: "border-teal-200",
     },
     {
       step: "03",
-      title: "Build professional quotes",
-      description:
-        "Create itemized quotes for clients in seconds. Every line item is linked to your real cost data.",
+      title: t("howItWorks.step3Title"),
+      description: t("howItWorks.step3Desc"),
       color: "bg-cyan-50 text-cyan-700",
       border: "border-cyan-200",
     },
     {
       step: "04",
-      title: "Track your profit",
-      description:
-        "See exactly how much you're making per project, per client, and per month — at a glance.",
+      title: t("howItWorks.step4Title"),
+      description: t("howItWorks.step4Desc"),
       color: "bg-green-50 text-green-700",
       border: "border-green-200",
     },
@@ -460,14 +455,13 @@ function HowItWorksSection() {
         {/* Header */}
         <div className="text-center mb-16">
           <span className="text-emerald-600 font-semibold text-sm uppercase tracking-wider">
-            The Solution
+            {t("howItWorks.eyebrow")}
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mt-2 mb-4">
-            From gut-feeling to data-driven in 4 steps
+            {t("howItWorks.headline")}
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            ZISKovač gives you a clear, repeatable system for pricing
-            profitably. No spreadsheets. No guessing.
+            {t("howItWorks.subheadline")}
           </p>
         </div>
 
@@ -510,51 +504,52 @@ function HowItWorksSection() {
 // Pricing Section
 // ---------------------------------------------------------------------------
 function PricingSection() {
+  const { t } = useTranslation()
   const { ref, visible } = useInView(0.1)
   const [annual, setAnnual] = useState(false)
 
   const plans = [
     {
-      name: "Starter",
-      price: annual ? 0 : 0,
-      description: "Perfect for solo freelancers just getting started.",
+      name: t("pricing.starterName"),
+      price: 0,
+      description: t("pricing.starterDesc"),
       features: [
-        "Cost calculator",
-        "Up to 5 quotes/month",
-        "Basic PDF export",
-        "1 user",
+        t("pricing.feature_costCalculator"),
+        t("pricing.feature_upTo5Quotes"),
+        t("pricing.feature_basicPdf"),
+        t("pricing.feature_1user"),
       ],
-      cta: "Start for Free",
+      cta: t("pricing.starterCta"),
       highlight: false,
     },
     {
-      name: "Pro",
+      name: t("pricing.proName"),
       price: annual ? 9 : 12,
-      description: "For serious freelancers who want full profitability control.",
+      description: t("pricing.proDesc"),
       features: [
-        "Everything in Starter",
-        "Unlimited quotes",
-        "Branded PDF templates",
-        "Profit analytics dashboard",
-        "Client management",
-        "Priority support",
+        t("pricing.feature_everythingInStarter"),
+        t("pricing.feature_unlimitedQuotes"),
+        t("pricing.feature_brandedPdf"),
+        t("pricing.feature_analytics"),
+        t("pricing.feature_clientMgmt"),
+        t("pricing.feature_prioritySupport"),
       ],
-      cta: "Start 14-day Trial",
+      cta: t("pricing.proCta"),
       highlight: true,
     },
     {
-      name: "Business",
+      name: t("pricing.businessName"),
       price: annual ? 24 : 29,
-      description: "For micro-SMEs and small teams.",
+      description: t("pricing.businessDesc"),
       features: [
-        "Everything in Pro",
-        "Up to 5 team members",
-        "Multi-project tracking",
-        "Expense tracking",
-        "API access",
-        "Dedicated support",
+        t("pricing.feature_everythingInPro"),
+        t("pricing.feature_5teamMembers"),
+        t("pricing.feature_multiProject"),
+        t("pricing.feature_expenseTracking"),
+        t("pricing.feature_api"),
+        t("pricing.feature_dedicatedSupport"),
       ],
-      cta: "Contact Sales",
+      cta: t("pricing.businessCta"),
       highlight: false,
     },
   ]
@@ -565,13 +560,13 @@ function PricingSection() {
         {/* Header */}
         <div className="text-center mb-12">
           <span className="text-emerald-600 font-semibold text-sm uppercase tracking-wider">
-            Pricing
+            {t("pricing.eyebrow")}
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mt-2 mb-4">
-            Simple, transparent pricing
+            {t("pricing.headline")}
           </h2>
           <p className="text-gray-600 mb-6">
-            No hidden fees. Cancel anytime.
+            {t("pricing.subheadline")}
           </p>
 
           {/* Toggle */}
@@ -582,7 +577,7 @@ function PricingSection() {
                 !annual ? "bg-white shadow text-gray-900" : "text-gray-500"
               }`}
             >
-              Monthly
+              {t("pricing.monthly")}
             </button>
             <button
               onClick={() => setAnnual(true)}
@@ -590,7 +585,7 @@ function PricingSection() {
                 annual ? "bg-white shadow text-gray-900" : "text-gray-500"
               }`}
             >
-              Annual
+              {t("pricing.annual")}
               <span className="ml-1.5 text-emerald-600 text-xs font-semibold">–25%</span>
             </button>
           </div>
@@ -614,7 +609,7 @@ function PricingSection() {
             >
               {plan.highlight && (
                 <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-amber-400 text-amber-900 text-xs font-bold px-3 py-1 rounded-full">
-                  Most Popular
+                  {t("pricing.mostPopular")}
                 </div>
               )}
 
@@ -631,12 +626,12 @@ function PricingSection() {
                   </span>
                   {plan.price > 0 && (
                     <span className={`text-sm mb-1 ${plan.highlight ? "text-emerald-200" : "text-gray-400"}`}>
-                      /mo
+                      {t("pricing.perMonth")}
                     </span>
                   )}
                   {plan.price === 0 && (
                     <span className={`text-sm mb-1 ${plan.highlight ? "text-emerald-200" : "text-gray-400"}`}>
-                      forever free
+                      {t("pricing.foreverFree")}
                     </span>
                   )}
                 </div>
@@ -682,34 +677,17 @@ function PricingSection() {
 // FAQ Section
 // ---------------------------------------------------------------------------
 function FAQSection() {
+  const { t } = useTranslation()
   const { ref, visible } = useInView()
   const [open, setOpen] = useState<number | null>(null)
 
   const faqs = [
-    {
-      q: "Who is ZISKovač designed for?",
-      a: "ZISKovač is built for freelancers, solo consultants, and micro-SMEs (1–10 people) who want to price their services profitably and generate professional quotes without complex accounting software.",
-    },
-    {
-      q: "Do I need accounting knowledge to use it?",
-      a: "Not at all. ZISKovač is designed to be intuitive. You enter plain numbers — your monthly expenses, desired income, working hours — and the app does the math for you.",
-    },
-    {
-      q: "How does the pricing calculator work?",
-      a: "You input all your real costs (overhead, subscriptions, taxes, non-billable hours) and your desired take-home income. ZISKovač calculates the minimum hourly or daily rate you must charge to be profitable.",
-    },
-    {
-      q: "Can I generate quotes for clients?",
-      a: "Yes! With the Pro and Business plans, you can generate branded PDF quotes linked to your real cost data. Clients receive a professional document; you see your actual margin on every line.",
-    },
-    {
-      q: "Is my data secure?",
-      a: "Yes. All data is encrypted at rest and in transit. We never share your business data with third parties. You can export or delete your data at any time.",
-    },
-    {
-      q: "Can I try it before paying?",
-      a: "Absolutely. The Starter plan is free forever. Pro and Business plans offer a 14-day free trial with no credit card required.",
-    },
+    { q: t("faq.q1"), a: t("faq.a1") },
+    { q: t("faq.q2"), a: t("faq.a2") },
+    { q: t("faq.q3"), a: t("faq.a3") },
+    { q: t("faq.q4"), a: t("faq.a4") },
+    { q: t("faq.q5"), a: t("faq.a5") },
+    { q: t("faq.q6"), a: t("faq.a6") },
   ]
 
   return (
@@ -718,15 +696,15 @@ function FAQSection() {
         {/* Header */}
         <div className="text-center mb-12">
           <span className="text-emerald-600 font-semibold text-sm uppercase tracking-wider">
-            FAQ
+            {t("faq.eyebrow")}
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mt-2 mb-4">
-            Frequently asked questions
+            {t("faq.headline")}
           </h2>
           <p className="text-gray-600">
-            Still have questions?{" "}
+            {t("faq.contactText")}{" "}
             <a href="mailto:hello@ziskovac.com" className="text-emerald-600 hover:underline">
-              Contact us
+              {t("faq.contactLink")}
             </a>
             .
           </p>
@@ -778,6 +756,7 @@ function FAQSection() {
 // CTA Banner
 // ---------------------------------------------------------------------------
 function CTABanner() {
+  const { t } = useTranslation()
   const { ref, visible } = useInView()
 
   return (
@@ -795,18 +774,17 @@ function CTABanner() {
         }`}
       >
         <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4">
-          Ready to close the profitability gap?
+          {t("cta.headline")}
         </h2>
         <p className="text-emerald-100 text-lg mb-8">
-          Join hundreds of freelancers who stopped undercharging and started
-          building sustainable businesses.
+          {t("cta.subheadline")}
         </p>
         <Link to="/register">
           <Button
             size="lg"
             className="bg-white text-emerald-700 hover:bg-emerald-50 shadow-xl hover:shadow-2xl transition-all hover:-translate-y-0.5 font-semibold"
           >
-            Start for Free — No Credit Card Required
+            {t("cta.button")}
           </Button>
         </Link>
       </div>
@@ -818,6 +796,15 @@ function CTABanner() {
 // Footer
 // ---------------------------------------------------------------------------
 function Footer() {
+  const { t } = useTranslation()
+
+  const productLinks = [
+    { label: t("nav.about"), anchor: "#about" },
+    { label: t("nav.howItWorks"), anchor: "#how-it-works" },
+    { label: t("nav.pricing"), anchor: "#pricing" },
+    { label: t("nav.faq"), anchor: "#faq" },
+  ]
+
   return (
     <footer className="bg-gray-900 text-gray-400 py-12">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -833,21 +820,21 @@ function Footer() {
               </span>
             </div>
             <p className="text-sm leading-relaxed">
-              Data-driven profitability for freelancers and micro-SMEs.
+              {t("footer.tagline")}
             </p>
           </div>
 
           {/* Product links */}
           <div>
-            <h4 className="text-white font-semibold text-sm mb-3">Product</h4>
+            <h4 className="text-white font-semibold text-sm mb-3">{t("footer.productHeading")}</h4>
             <ul className="space-y-2 text-sm">
-              {["About", "How It Works", "Pricing", "FAQ"].map((item) => (
-                <li key={item}>
+              {productLinks.map((link) => (
+                <li key={link.anchor}>
                   <a
-                    href={`#${item.toLowerCase().replace(/ /g, "-")}`}
+                    href={link.anchor}
                     className="hover:text-emerald-400 transition-colors"
                   >
-                    {item}
+                    {link.label}
                   </a>
                 </li>
               ))}
@@ -856,16 +843,16 @@ function Footer() {
 
           {/* Account links */}
           <div>
-            <h4 className="text-white font-semibold text-sm mb-3">Account</h4>
+            <h4 className="text-white font-semibold text-sm mb-3">{t("footer.accountHeading")}</h4>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link to="/login" className="hover:text-emerald-400 transition-colors">
-                  Log in
+                  {t("footer.login")}
                 </Link>
               </li>
               <li>
                 <Link to="/register" className="hover:text-emerald-400 transition-colors">
-                  Register
+                  {t("footer.register")}
                 </Link>
               </li>
             </ul>
@@ -873,10 +860,8 @@ function Footer() {
         </div>
 
         <div className="border-t border-gray-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs">
-          <p>© {new Date().getFullYear()} ZISKovač. All rights reserved.</p>
-          <p>
-            Designed for freelancers who deserve to profit.
-          </p>
+          <p>{t("footer.copyright", { year: new Date().getFullYear() })}</p>
+          <p>{t("footer.designed")}</p>
         </div>
       </div>
     </footer>

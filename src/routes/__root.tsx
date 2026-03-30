@@ -1,6 +1,8 @@
 import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router"
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools"
 import { TanStackDevtools } from "@tanstack/react-devtools"
+import { I18nextProvider } from "react-i18next"
+import i18n from "@/lib/i18n"
 
 import appCss from "../styles.css?url"
 
@@ -15,7 +17,7 @@ export const Route = createRootRoute({
         content: "width=device-width, initial-scale=1",
       },
       {
-        title: "TanStack Start Starter",
+        title: "ZISKovač",
       },
     ],
     links: [
@@ -35,7 +37,9 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        {children}
+        <I18nextProvider i18n={i18n}>
+          {children}
+        </I18nextProvider>
         <TanStackDevtools
           config={{
             position: "bottom-right",
