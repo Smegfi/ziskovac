@@ -1,0 +1,31 @@
+# Version control
+.git
+.gitignore
+
+# Dependencies (installed fresh inside Docker)
+node_modules
+
+# Build artifacts
+.output
+dist
+
+# Local database – never bake into the image
+*.db
+*.sqlite
+
+# Dev/test files
+*.test.*
+*.spec.*
+coverage
+
+# Editor / OS
+.vscode
+.idea
+.DS_Store
+
+# Env files – inject at runtime via env vars
+.env*
+!.env.example
+
+# Logs
+*.log
