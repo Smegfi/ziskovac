@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { LanguageSwitcher } from "@/components/ui/language-switcher"
 import { signIn } from "@/lib/auth-client"
-import { getSession } from "@/lib/session.server"
+import { getSession } from "@/lib/session"
 
 export const Route = createFileRoute("/login")({
   validateSearch: z.object({
