@@ -14,7 +14,15 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { LayoutDashboardIcon, ListIcon, ChartBarIcon, FolderIcon, UsersIcon, CommandIcon } from "lucide-react"
+import {
+  LayoutDashboardIcon,
+  ListIcon,
+  ChartBarIcon,
+  FolderIcon,
+  UsersIcon,
+  CommandIcon,
+  ReceiptIcon,
+} from "lucide-react"
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { t } = useTranslation()
@@ -40,6 +48,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       title: t("sidebar.projects"),
       url: "/app/projects",
       icon: <FolderIcon />,
+    },
+    {
+      title: t("sidebar.expenses"),
+      url: "/app/expenses",
+      icon: <ReceiptIcon />,
     },
     {
       title: t("sidebar.team"),

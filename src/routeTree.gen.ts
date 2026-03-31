@@ -18,9 +18,15 @@ import { Route as AppTeamIndexRouteImport } from './routes/app/team/index'
 import { Route as AppSettingsIndexRouteImport } from './routes/app/settings/index'
 import { Route as AppProjectsIndexRouteImport } from './routes/app/projects/index'
 import { Route as AppLifecycleIndexRouteImport } from './routes/app/lifecycle/index'
+import { Route as AppExpensesIndexRouteImport } from './routes/app/expenses/index'
 import { Route as AppDashboardIndexRouteImport } from './routes/app/dashboard/index'
 import { Route as AppAnalyticsIndexRouteImport } from './routes/app/analytics/index'
+import { Route as ApiExpensesIndexRouteImport } from './routes/api/expenses/index'
+import { Route as ApiExpensesIdRouteImport } from './routes/api/expenses/$id'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
+import { Route as AppExpensesCategoriesIndexRouteImport } from './routes/app/expenses/categories/index'
+import { Route as ApiExpensesCategoriesIndexRouteImport } from './routes/api/expenses/categories/index'
+import { Route as ApiExpensesCategoriesIdRouteImport } from './routes/api/expenses/categories/$id'
 
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
@@ -67,6 +73,11 @@ const AppLifecycleIndexRoute = AppLifecycleIndexRouteImport.update({
   path: '/lifecycle/',
   getParentRoute: () => AppRouteRoute,
 } as any)
+const AppExpensesIndexRoute = AppExpensesIndexRouteImport.update({
+  id: '/expenses/',
+  path: '/expenses/',
+  getParentRoute: () => AppRouteRoute,
+} as any)
 const AppDashboardIndexRoute = AppDashboardIndexRouteImport.update({
   id: '/dashboard/',
   path: '/dashboard/',
@@ -77,9 +88,36 @@ const AppAnalyticsIndexRoute = AppAnalyticsIndexRouteImport.update({
   path: '/analytics/',
   getParentRoute: () => AppRouteRoute,
 } as any)
+const ApiExpensesIndexRoute = ApiExpensesIndexRouteImport.update({
+  id: '/api/expenses/',
+  path: '/api/expenses/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiExpensesIdRoute = ApiExpensesIdRouteImport.update({
+  id: '/api/expenses/$id',
+  path: '/api/expenses/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppExpensesCategoriesIndexRoute =
+  AppExpensesCategoriesIndexRouteImport.update({
+    id: '/expenses/categories/',
+    path: '/expenses/categories/',
+    getParentRoute: () => AppRouteRoute,
+  } as any)
+const ApiExpensesCategoriesIndexRoute =
+  ApiExpensesCategoriesIndexRouteImport.update({
+    id: '/api/expenses/categories/',
+    path: '/api/expenses/categories/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiExpensesCategoriesIdRoute = ApiExpensesCategoriesIdRouteImport.update({
+  id: '/api/expenses/categories/$id',
+  path: '/api/expenses/categories/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -90,12 +128,18 @@ export interface FileRoutesByFullPath {
   '/register': typeof RegisterRoute
   '/app/': typeof AppIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/expenses/$id': typeof ApiExpensesIdRoute
+  '/api/expenses/': typeof ApiExpensesIndexRoute
   '/app/analytics/': typeof AppAnalyticsIndexRoute
   '/app/dashboard/': typeof AppDashboardIndexRoute
+  '/app/expenses/': typeof AppExpensesIndexRoute
   '/app/lifecycle/': typeof AppLifecycleIndexRoute
   '/app/projects/': typeof AppProjectsIndexRoute
   '/app/settings/': typeof AppSettingsIndexRoute
   '/app/team/': typeof AppTeamIndexRoute
+  '/api/expenses/categories/$id': typeof ApiExpensesCategoriesIdRoute
+  '/api/expenses/categories/': typeof ApiExpensesCategoriesIndexRoute
+  '/app/expenses/categories/': typeof AppExpensesCategoriesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -103,12 +147,18 @@ export interface FileRoutesByTo {
   '/register': typeof RegisterRoute
   '/app': typeof AppIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/expenses/$id': typeof ApiExpensesIdRoute
+  '/api/expenses': typeof ApiExpensesIndexRoute
   '/app/analytics': typeof AppAnalyticsIndexRoute
   '/app/dashboard': typeof AppDashboardIndexRoute
+  '/app/expenses': typeof AppExpensesIndexRoute
   '/app/lifecycle': typeof AppLifecycleIndexRoute
   '/app/projects': typeof AppProjectsIndexRoute
   '/app/settings': typeof AppSettingsIndexRoute
   '/app/team': typeof AppTeamIndexRoute
+  '/api/expenses/categories/$id': typeof ApiExpensesCategoriesIdRoute
+  '/api/expenses/categories': typeof ApiExpensesCategoriesIndexRoute
+  '/app/expenses/categories': typeof AppExpensesCategoriesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -118,12 +168,18 @@ export interface FileRoutesById {
   '/register': typeof RegisterRoute
   '/app/': typeof AppIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/expenses/$id': typeof ApiExpensesIdRoute
+  '/api/expenses/': typeof ApiExpensesIndexRoute
   '/app/analytics/': typeof AppAnalyticsIndexRoute
   '/app/dashboard/': typeof AppDashboardIndexRoute
+  '/app/expenses/': typeof AppExpensesIndexRoute
   '/app/lifecycle/': typeof AppLifecycleIndexRoute
   '/app/projects/': typeof AppProjectsIndexRoute
   '/app/settings/': typeof AppSettingsIndexRoute
   '/app/team/': typeof AppTeamIndexRoute
+  '/api/expenses/categories/$id': typeof ApiExpensesCategoriesIdRoute
+  '/api/expenses/categories/': typeof ApiExpensesCategoriesIndexRoute
+  '/app/expenses/categories/': typeof AppExpensesCategoriesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -134,12 +190,18 @@ export interface FileRouteTypes {
     | '/register'
     | '/app/'
     | '/api/auth/$'
+    | '/api/expenses/$id'
+    | '/api/expenses/'
     | '/app/analytics/'
     | '/app/dashboard/'
+    | '/app/expenses/'
     | '/app/lifecycle/'
     | '/app/projects/'
     | '/app/settings/'
     | '/app/team/'
+    | '/api/expenses/categories/$id'
+    | '/api/expenses/categories/'
+    | '/app/expenses/categories/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -147,12 +209,18 @@ export interface FileRouteTypes {
     | '/register'
     | '/app'
     | '/api/auth/$'
+    | '/api/expenses/$id'
+    | '/api/expenses'
     | '/app/analytics'
     | '/app/dashboard'
+    | '/app/expenses'
     | '/app/lifecycle'
     | '/app/projects'
     | '/app/settings'
     | '/app/team'
+    | '/api/expenses/categories/$id'
+    | '/api/expenses/categories'
+    | '/app/expenses/categories'
   id:
     | '__root__'
     | '/'
@@ -161,12 +229,18 @@ export interface FileRouteTypes {
     | '/register'
     | '/app/'
     | '/api/auth/$'
+    | '/api/expenses/$id'
+    | '/api/expenses/'
     | '/app/analytics/'
     | '/app/dashboard/'
+    | '/app/expenses/'
     | '/app/lifecycle/'
     | '/app/projects/'
     | '/app/settings/'
     | '/app/team/'
+    | '/api/expenses/categories/$id'
+    | '/api/expenses/categories/'
+    | '/app/expenses/categories/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -175,6 +249,10 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   RegisterRoute: typeof RegisterRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  ApiExpensesIdRoute: typeof ApiExpensesIdRoute
+  ApiExpensesIndexRoute: typeof ApiExpensesIndexRoute
+  ApiExpensesCategoriesIdRoute: typeof ApiExpensesCategoriesIdRoute
+  ApiExpensesCategoriesIndexRoute: typeof ApiExpensesCategoriesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -242,6 +320,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppLifecycleIndexRouteImport
       parentRoute: typeof AppRouteRoute
     }
+    '/app/expenses/': {
+      id: '/app/expenses/'
+      path: '/expenses'
+      fullPath: '/app/expenses/'
+      preLoaderRoute: typeof AppExpensesIndexRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
     '/app/dashboard/': {
       id: '/app/dashboard/'
       path: '/dashboard'
@@ -256,11 +341,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppAnalyticsIndexRouteImport
       parentRoute: typeof AppRouteRoute
     }
+    '/api/expenses/': {
+      id: '/api/expenses/'
+      path: '/api/expenses'
+      fullPath: '/api/expenses/'
+      preLoaderRoute: typeof ApiExpensesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/expenses/$id': {
+      id: '/api/expenses/$id'
+      path: '/api/expenses/$id'
+      fullPath: '/api/expenses/$id'
+      preLoaderRoute: typeof ApiExpensesIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/auth/$': {
       id: '/api/auth/$'
       path: '/api/auth/$'
       fullPath: '/api/auth/$'
       preLoaderRoute: typeof ApiAuthSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app/expenses/categories/': {
+      id: '/app/expenses/categories/'
+      path: '/expenses/categories'
+      fullPath: '/app/expenses/categories/'
+      preLoaderRoute: typeof AppExpensesCategoriesIndexRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/api/expenses/categories/': {
+      id: '/api/expenses/categories/'
+      path: '/api/expenses/categories'
+      fullPath: '/api/expenses/categories/'
+      preLoaderRoute: typeof ApiExpensesCategoriesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/expenses/categories/$id': {
+      id: '/api/expenses/categories/$id'
+      path: '/api/expenses/categories/$id'
+      fullPath: '/api/expenses/categories/$id'
+      preLoaderRoute: typeof ApiExpensesCategoriesIdRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -270,20 +390,24 @@ interface AppRouteRouteChildren {
   AppIndexRoute: typeof AppIndexRoute
   AppAnalyticsIndexRoute: typeof AppAnalyticsIndexRoute
   AppDashboardIndexRoute: typeof AppDashboardIndexRoute
+  AppExpensesIndexRoute: typeof AppExpensesIndexRoute
   AppLifecycleIndexRoute: typeof AppLifecycleIndexRoute
   AppProjectsIndexRoute: typeof AppProjectsIndexRoute
   AppSettingsIndexRoute: typeof AppSettingsIndexRoute
   AppTeamIndexRoute: typeof AppTeamIndexRoute
+  AppExpensesCategoriesIndexRoute: typeof AppExpensesCategoriesIndexRoute
 }
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
   AppIndexRoute: AppIndexRoute,
   AppAnalyticsIndexRoute: AppAnalyticsIndexRoute,
   AppDashboardIndexRoute: AppDashboardIndexRoute,
+  AppExpensesIndexRoute: AppExpensesIndexRoute,
   AppLifecycleIndexRoute: AppLifecycleIndexRoute,
   AppProjectsIndexRoute: AppProjectsIndexRoute,
   AppSettingsIndexRoute: AppSettingsIndexRoute,
   AppTeamIndexRoute: AppTeamIndexRoute,
+  AppExpensesCategoriesIndexRoute: AppExpensesCategoriesIndexRoute,
 }
 
 const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
@@ -296,6 +420,10 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   RegisterRoute: RegisterRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
+  ApiExpensesIdRoute: ApiExpensesIdRoute,
+  ApiExpensesIndexRoute: ApiExpensesIndexRoute,
+  ApiExpensesCategoriesIdRoute: ApiExpensesCategoriesIdRoute,
+  ApiExpensesCategoriesIndexRoute: ApiExpensesCategoriesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
