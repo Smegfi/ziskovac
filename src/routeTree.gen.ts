@@ -14,6 +14,12 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as AppRouteRouteImport } from './routes/app/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppIndexRouteImport } from './routes/app/index'
+import { Route as AppTeamIndexRouteImport } from './routes/app/team/index'
+import { Route as AppSettingsIndexRouteImport } from './routes/app/settings/index'
+import { Route as AppProjectsIndexRouteImport } from './routes/app/projects/index'
+import { Route as AppLifecycleIndexRouteImport } from './routes/app/lifecycle/index'
+import { Route as AppDashboardIndexRouteImport } from './routes/app/dashboard/index'
+import { Route as AppAnalyticsIndexRouteImport } from './routes/app/analytics/index'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 
 const RegisterRoute = RegisterRouteImport.update({
@@ -41,6 +47,36 @@ const AppIndexRoute = AppIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AppRouteRoute,
 } as any)
+const AppTeamIndexRoute = AppTeamIndexRouteImport.update({
+  id: '/team/',
+  path: '/team/',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const AppSettingsIndexRoute = AppSettingsIndexRouteImport.update({
+  id: '/settings/',
+  path: '/settings/',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const AppProjectsIndexRoute = AppProjectsIndexRouteImport.update({
+  id: '/projects/',
+  path: '/projects/',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const AppLifecycleIndexRoute = AppLifecycleIndexRouteImport.update({
+  id: '/lifecycle/',
+  path: '/lifecycle/',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const AppDashboardIndexRoute = AppDashboardIndexRouteImport.update({
+  id: '/dashboard/',
+  path: '/dashboard/',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const AppAnalyticsIndexRoute = AppAnalyticsIndexRouteImport.update({
+  id: '/analytics/',
+  path: '/analytics/',
+  getParentRoute: () => AppRouteRoute,
+} as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
@@ -54,6 +90,12 @@ export interface FileRoutesByFullPath {
   '/register': typeof RegisterRoute
   '/app/': typeof AppIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/app/analytics/': typeof AppAnalyticsIndexRoute
+  '/app/dashboard/': typeof AppDashboardIndexRoute
+  '/app/lifecycle/': typeof AppLifecycleIndexRoute
+  '/app/projects/': typeof AppProjectsIndexRoute
+  '/app/settings/': typeof AppSettingsIndexRoute
+  '/app/team/': typeof AppTeamIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -61,6 +103,12 @@ export interface FileRoutesByTo {
   '/register': typeof RegisterRoute
   '/app': typeof AppIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/app/analytics': typeof AppAnalyticsIndexRoute
+  '/app/dashboard': typeof AppDashboardIndexRoute
+  '/app/lifecycle': typeof AppLifecycleIndexRoute
+  '/app/projects': typeof AppProjectsIndexRoute
+  '/app/settings': typeof AppSettingsIndexRoute
+  '/app/team': typeof AppTeamIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -70,12 +118,41 @@ export interface FileRoutesById {
   '/register': typeof RegisterRoute
   '/app/': typeof AppIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/app/analytics/': typeof AppAnalyticsIndexRoute
+  '/app/dashboard/': typeof AppDashboardIndexRoute
+  '/app/lifecycle/': typeof AppLifecycleIndexRoute
+  '/app/projects/': typeof AppProjectsIndexRoute
+  '/app/settings/': typeof AppSettingsIndexRoute
+  '/app/team/': typeof AppTeamIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/app' | '/login' | '/register' | '/app/' | '/api/auth/$'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/login'
+    | '/register'
+    | '/app/'
+    | '/api/auth/$'
+    | '/app/analytics/'
+    | '/app/dashboard/'
+    | '/app/lifecycle/'
+    | '/app/projects/'
+    | '/app/settings/'
+    | '/app/team/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/register' | '/app' | '/api/auth/$'
+  to:
+    | '/'
+    | '/login'
+    | '/register'
+    | '/app'
+    | '/api/auth/$'
+    | '/app/analytics'
+    | '/app/dashboard'
+    | '/app/lifecycle'
+    | '/app/projects'
+    | '/app/settings'
+    | '/app/team'
   id:
     | '__root__'
     | '/'
@@ -84,6 +161,12 @@ export interface FileRouteTypes {
     | '/register'
     | '/app/'
     | '/api/auth/$'
+    | '/app/analytics/'
+    | '/app/dashboard/'
+    | '/app/lifecycle/'
+    | '/app/projects/'
+    | '/app/settings/'
+    | '/app/team/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -131,6 +214,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRouteRoute
     }
+    '/app/team/': {
+      id: '/app/team/'
+      path: '/team'
+      fullPath: '/app/team/'
+      preLoaderRoute: typeof AppTeamIndexRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/app/settings/': {
+      id: '/app/settings/'
+      path: '/settings'
+      fullPath: '/app/settings/'
+      preLoaderRoute: typeof AppSettingsIndexRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/app/projects/': {
+      id: '/app/projects/'
+      path: '/projects'
+      fullPath: '/app/projects/'
+      preLoaderRoute: typeof AppProjectsIndexRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/app/lifecycle/': {
+      id: '/app/lifecycle/'
+      path: '/lifecycle'
+      fullPath: '/app/lifecycle/'
+      preLoaderRoute: typeof AppLifecycleIndexRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/app/dashboard/': {
+      id: '/app/dashboard/'
+      path: '/dashboard'
+      fullPath: '/app/dashboard/'
+      preLoaderRoute: typeof AppDashboardIndexRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/app/analytics/': {
+      id: '/app/analytics/'
+      path: '/analytics'
+      fullPath: '/app/analytics/'
+      preLoaderRoute: typeof AppAnalyticsIndexRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
     '/api/auth/$': {
       id: '/api/auth/$'
       path: '/api/auth/$'
@@ -143,10 +268,22 @@ declare module '@tanstack/react-router' {
 
 interface AppRouteRouteChildren {
   AppIndexRoute: typeof AppIndexRoute
+  AppAnalyticsIndexRoute: typeof AppAnalyticsIndexRoute
+  AppDashboardIndexRoute: typeof AppDashboardIndexRoute
+  AppLifecycleIndexRoute: typeof AppLifecycleIndexRoute
+  AppProjectsIndexRoute: typeof AppProjectsIndexRoute
+  AppSettingsIndexRoute: typeof AppSettingsIndexRoute
+  AppTeamIndexRoute: typeof AppTeamIndexRoute
 }
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
   AppIndexRoute: AppIndexRoute,
+  AppAnalyticsIndexRoute: AppAnalyticsIndexRoute,
+  AppDashboardIndexRoute: AppDashboardIndexRoute,
+  AppLifecycleIndexRoute: AppLifecycleIndexRoute,
+  AppProjectsIndexRoute: AppProjectsIndexRoute,
+  AppSettingsIndexRoute: AppSettingsIndexRoute,
+  AppTeamIndexRoute: AppTeamIndexRoute,
 }
 
 const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(

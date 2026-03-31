@@ -131,6 +131,39 @@
     "alreadyHaveAccount": "Already have an account?",
     "signIn": "Sign in"
   },
+  "dashboard": {
+    "welcome": "Welcome back, {{name}}",
+    "subtitle": "Here's an overview of your business.",
+    "totalQuotes": "Total Quotes",
+    "activeQuotes": "Active Quotes",
+    "revenue": "Estimated Revenue",
+    "clients": "Clients",
+    "recentQuotes": "Recent Quotes",
+    "noQuotesYet": "No quotes yet. Create your first quote to get started.",
+    "profitOverview": "Profit Overview",
+    "noDataYet": "No data yet. Your profit chart will appear here."
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Manage your account and preferences.",
+    "profileSection": "Profile",
+    "profileDescription": "Your personal information.",
+    "nameLabel": "Name",
+    "emailLabel": "Email",
+    "saveProfile": "Save changes",
+    "securitySection": "Security",
+    "securityDescription": "Update your password.",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "changePassword": "Change password"
+  },
+  "placeholder": {
+    "comingSoon": "Coming soon",
+    "lifecycleDescription": "Track the full lifecycle of your quotes — from draft to accepted and invoiced.",
+    "analyticsDescription": "Deep-dive into your profitability data. Charts and insights are on the way.",
+    "projectsDescription": "Organize your work into projects and track profitability per engagement.",
+    "teamDescription": "Invite team members and collaborate on quotes together."
+  },
   "sidebar": {
     "dashboard": "Dashboard",
     "lifecycle": "Lifecycle",

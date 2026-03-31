@@ -131,6 +131,39 @@
     "alreadyHaveAccount": "Už máte účet?",
     "signIn": "Prihlásiť sa"
   },
+  "dashboard": {
+    "welcome": "Vitajte späť, {{name}}",
+    "subtitle": "Tu je prehľad vašho podnikania.",
+    "totalQuotes": "Celkové ponuky",
+    "activeQuotes": "Aktívne ponuky",
+    "revenue": "Odhadovaný príjem",
+    "clients": "Klienti",
+    "recentQuotes": "Nedávne ponuky",
+    "noQuotesYet": "Zatiaľ žiadne ponuky. Vytvorte svoju prvú ponuku.",
+    "profitOverview": "Prehľad zisku",
+    "noDataYet": "Zatiaľ žiadne dáta. Tu sa zobrazí váš graf zisku."
+  },
+  "settings": {
+    "title": "Nastavenia",
+    "subtitle": "Spravujte váš účet a preferencie.",
+    "profileSection": "Profil",
+    "profileDescription": "Vaše osobné údaje.",
+    "nameLabel": "Meno",
+    "emailLabel": "E-mail",
+    "saveProfile": "Uložiť zmeny",
+    "securitySection": "Bezpečnosť",
+    "securityDescription": "Aktualizujte vaše heslo.",
+    "currentPassword": "Aktuálne heslo",
+    "newPassword": "Nové heslo",
+    "changePassword": "Zmeniť heslo"
+  },
+  "placeholder": {
+    "comingSoon": "Čoskoro",
+    "lifecycleDescription": "Sledujte celý životný cyklus vašich ponúk — od návrhu po akceptáciu a fakturáciu.",
+    "analyticsDescription": "Ponorte sa hlboko do vašich dát o ziskovosti. Grafy a prehľady čoskoro.",
+    "projectsDescription": "Organizujte svoju prácu do projektov a sledujte ziskovosť každej zákazky.",
+    "teamDescription": "Pozvite členov tímu a spolupracujte na ponukách spoločne."
+  },
   "sidebar": {
     "dashboard": "Prehľad",
     "lifecycle": "Životný cyklus",
