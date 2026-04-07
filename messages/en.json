@@ -164,6 +164,14 @@
     "projectsDescription": "Organize your work into projects and track profitability per engagement.",
     "teamDescription": "Invite team members and collaborate on quotes together."
   },
+  "seo": {
+    "homeTitle": "ZISKovač — Data-driven profitability for freelancers",
+    "homeDescription": "Stop guessing your pricing. ZISKovač automates cost tracking, rate calculation, and professional quote generation for freelancers and micro-SMEs.",
+    "loginTitle": "Sign in — ZISKovač",
+    "loginDescription": "Sign in to your ZISKovač account to manage your profitability.",
+    "registerTitle": "Create account — ZISKovač",
+    "registerDescription": "Create your free ZISKovač account and start pricing profitably today."
+  },
   "sidebar": {
     "dashboard": "Dashboard",
     "lifecycle": "Lifecycle",

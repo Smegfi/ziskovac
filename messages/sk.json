@@ -164,6 +164,14 @@
     "projectsDescription": "Organizujte svoju prácu do projektov a sledujte ziskovosť každej zákazky.",
     "teamDescription": "Pozvite členov tímu a spolupracujte na ponukách spoločne."
   },
+  "seo": {
+    "homeTitle": "ZISKovač — Dátovo riadená ziskovosť pre freelancerov",
+    "homeDescription": "Prestaňte hádať svoje ceny. ZISKovač automatizuje sledovanie nákladov, výpočet sadzieb a generovanie profesionálnych ponúk pre freelancerov a mikro-podniky.",
+    "loginTitle": "Prihlásiť sa — ZISKovač",
+    "loginDescription": "Prihláste sa do svojho účtu ZISKovač a spravujte svoju ziskovosť.",
+    "registerTitle": "Vytvoriť účet — ZISKovač",
+    "registerDescription": "Vytvorte si bezplatný účet ZISKovač a začnite dnes oceňovať ziskovo."
+  },
   "sidebar": {
     "dashboard": "Prehľad",
     "lifecycle": "Životný cyklus",
