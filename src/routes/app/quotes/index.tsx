@@ -406,6 +406,9 @@ function QuotesPage() {
                 <div className="text-right space-y-1">
                   {quote.netProfit && <p className="font-bold text-green-600">{quote.netProfit} CZK</p>}
                   <div className="flex gap-1 justify-end">
+                    <Button variant="ghost" size="sm" onClick={() => window.location.href = `/app/quotes/${quote.id}`}>
+                      Compose
+                    </Button>
                     <Button variant="ghost" size="sm" onClick={() => window.location.href = `/app/quotes/${quote.id}/history`}>
                       History
                     </Button>

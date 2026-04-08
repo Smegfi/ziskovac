@@ -80,6 +80,53 @@ export const quote = pgTable(
 )
 
 /**
+ * Quote line items table - stores individual line items within a quote
+ * Each line item can be: service, material, or hourly work
+ * Supports flexible pricing and quantity models
+ */
+export const quoteLineItem = pgTable(
+  "quote_line_item",
+  {
+    id: text("id")
+      .primaryKey()
+      .$defaultFn(() => crypto.randomUUID()),
+    quoteId: text("quote_id")
+      .notNull()
+      .references(() => quote.id, { onDelete: "cascade" }),
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+
+    // Line item type and content
+    type: text("type").notNull(), // 'service', 'material', 'hourly'
+    description: text("description").notNull(), // What is being quoted
+    quantity: numeric("quantity", { precision: 10, scale: 2 }).notNull().default("1"),
+    unit: text("unit"), // e.g., 'hours', 'pcs', 'kg', etc.
+
+    // Pricing
+    unitPrice: numeric("unit_price", { precision: 12, scale: 2 }).notNull(),
+    subtotal: numeric("subtotal", { precision: 12, scale: 2 }).notNull(), // quantity * unitPrice
+
+    // Optional fields for hourly work
+    hourlyRate: numeric("hourly_rate", { precision: 10, scale: 2 }), // For hourly line items
+
+    // Sort order
+    sortOrder: integer("sort_order").notNull().default(0),
+
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at")
+      .defaultNow()
+      .$onUpdate(() => new Date())
+      .notNull(),
+  },
+  (table) => [
+    index("quote_line_item_quote_id_idx").on(table.quoteId),
+    index("quote_line_item_user_id_idx").on(table.userId),
+    index("quote_line_item_sort_order_idx").on(table.quoteId, table.sortOrder),
+  ],
+)
+
+/**
  * Relations
  */
 export const quoteSettingsRelations = relations(quoteSettings, ({ one }) => ({
@@ -89,9 +136,21 @@ export const quoteSettingsRelations = relations(quoteSettings, ({ one }) => ({
   }),
 }))
 
-export const quoteRelations = relations(quote, ({ one }) => ({
+export const quoteRelations = relations(quote, ({ one, many }) => ({
   user: one(user, {
     fields: [quote.userId],
+    references: [user.id],
+  }),
+  lineItems: many(quoteLineItem),
+}))
+
+export const quoteLineItemRelations = relations(quoteLineItem, ({ one }) => ({
+  quote: one(quote, {
+    fields: [quoteLineItem.quoteId],
+    references: [quote.id],
+  }),
+  user: one(user, {
+    fields: [quoteLineItem.userId],
     references: [user.id],
   }),
 }))
