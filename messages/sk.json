@@ -190,5 +190,45 @@
     "dataLibrary": "Dátová knižnica",
     "reports": "Prehľady",
     "wordAssistant": "Textový asistent"
+  },
+  "onboarding": {
+    "next": "Pokračovať",
+    "skip": "Preskočiť",
+    "back": "Späť",
+    "step1": {
+      "title": "Vitaj, {{name}}! 👋",
+      "description": "Nastavíme tvoj model rentability. Najprv — aký je tvoj mesačný príjmový cieľ?",
+      "incomeLabel": "Cieľový mesačný príjem",
+      "incomePlaceholder": "napr. 60000",
+      "incomeHint": "Požadovaný príjem pred výdavkami a daňami."
+    },
+    "step2": {
+      "title": "Aké sú tvoje mesačné náklady?",
+      "description": "Pridaj svoje fixné prevádzkové náklady. Zahrnieme ich do tvojej minimálnej sadzby."
+    },
+    "overhead": {
+      "preset1": "Softvérové predplatné",
+      "preset2": "Vybavenie & hardware",
+      "preset3": "Dane & poistenie",
+      "labelPlaceholder": "napr. Adobe CC",
+      "addRow": "Pridať náklad",
+      "total": "Celkové mesačné náklady",
+      "savedNote": "Pridané pri onboardingu"
+    },
+    "step3": {
+      "title": "Koľko hodín fakturujete?",
+      "description": "Koľko hodín mesačne očakávate, že budete fakturovať klientom?",
+      "hoursLabel": "Fakturovateľné hodiny / mesiac",
+      "hoursHint": "Typický freelancer fakturuje 100–140 hodín/mesiac.",
+      "rateLabel": "Tvoja minimálna hodinová sadzba",
+      "perHour": "hod",
+      "rateFormula": "({{income}} príjem + {{overhead}} náklady) ÷ {{hours}} hodín"
+    },
+    "step4": {
+      "title": "Všetko je nastavené!",
+      "description": "Tvoj základ rentability je pripravený. Začni sledovať a ponúkať s istotou.",
+      "yourRate": "Minimálna hodinová sadzba",
+      "ctaDashboard": "Prejsť na prehľad"
+    }
   }
 }

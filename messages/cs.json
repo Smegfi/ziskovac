@@ -190,5 +190,45 @@
     "dataLibrary": "Datová knihovna",
     "reports": "Přehledy",
     "wordAssistant": "Textový asistent"
+  },
+  "onboarding": {
+    "next": "Pokračovat",
+    "skip": "Přeskočit",
+    "back": "Zpět",
+    "step1": {
+      "title": "Vítej, {{name}}! 👋",
+      "description": "Nastavíme tvůj model rentability. Nejprve — jaký je tvůj měsíční příjmový cíl?",
+      "incomeLabel": "Cílový měsíční příjem",
+      "incomePlaceholder": "např. 60000",
+      "incomeHint": "Požadovaný příjem před výdaji a daněmi."
+    },
+    "step2": {
+      "title": "Jaké máš měsíční náklady?",
+      "description": "Přidej své fixní provozní náklady. Zahrneme je do tvé minimální sazby."
+    },
+    "overhead": {
+      "preset1": "Softwarová předplatná",
+      "preset2": "Vybavení & hardware",
+      "preset3": "Daně & pojištění",
+      "labelPlaceholder": "např. Adobe CC",
+      "addRow": "Přidat náklad",
+      "total": "Celkové měsíční náklady",
+      "savedNote": "Přidáno při onboardingu"
+    },
+    "step3": {
+      "title": "Kolik hodin fakturujete?",
+      "description": "Kolik hodin měsíčně očekáváte, že budete fakturovat klientům?",
+      "hoursLabel": "Fakturovatelné hodiny / měsíc",
+      "hoursHint": "Typický freelancer fakturuje 100–140 hodin/měsíc.",
+      "rateLabel": "Tvá minimální hodinová sazba",
+      "perHour": "hod",
+      "rateFormula": "({{income}} příjem + {{overhead}} náklady) ÷ {{hours}} hodin"
+    },
+    "step4": {
+      "title": "Vše je nastaveno!",
+      "description": "Tvůj základ rentability je připraven. Začni sledovat a nabízet s jistotou.",
+      "yourRate": "Minimální hodinová sazba",
+      "ctaDashboard": "Přejít na přehled"
+    }
   }
 }

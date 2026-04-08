@@ -46,7 +46,7 @@ function RegisterPage() {
       return
     }
 
-    await router.navigate({ to: redirectTo ?? "/app" })
+    await router.navigate({ to: redirectTo ?? "/onboarding" })
   }
 
   return (

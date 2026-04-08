@@ -190,5 +190,45 @@
     "dataLibrary": "Data Library",
     "reports": "Reports",
     "wordAssistant": "Word Assistant"
+  },
+  "onboarding": {
+    "next": "Continue",
+    "skip": "Skip this step",
+    "back": "Back",
+    "step1": {
+      "title": "Welcome, {{name}}! 👋",
+      "description": "Let's set up your profitability model. First — what's your monthly income goal?",
+      "incomeLabel": "Monthly target income",
+      "incomePlaceholder": "e.g. 60000",
+      "incomeHint": "Your desired take-home before expenses and taxes."
+    },
+    "step2": {
+      "title": "What are your monthly costs?",
+      "description": "Add your fixed overhead. We'll factor these into your minimum rate."
+    },
+    "overhead": {
+      "preset1": "Software subscriptions",
+      "preset2": "Equipment & hardware",
+      "preset3": "Taxes & insurance",
+      "labelPlaceholder": "e.g. Adobe CC",
+      "addRow": "Add cost",
+      "total": "Monthly overhead total",
+      "savedNote": "Added during onboarding"
+    },
+    "step3": {
+      "title": "How much can you bill?",
+      "description": "How many hours per month do you expect to bill clients?",
+      "hoursLabel": "Billable hours / month",
+      "hoursHint": "A typical freelancer bills 100–140 hours/month.",
+      "rateLabel": "Your minimum viable hourly rate",
+      "perHour": "hr",
+      "rateFormula": "({{income}} income + {{overhead}} overhead) ÷ {{hours}} hours"
+    },
+    "step4": {
+      "title": "You're all set!",
+      "description": "Your profitability baseline is ready. Start tracking and quoting with confidence.",
+      "yourRate": "Minimum hourly rate",
+      "ctaDashboard": "Go to Dashboard"
+    }
   }
 }
