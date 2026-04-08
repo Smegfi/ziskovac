@@ -22,6 +22,7 @@ import {
   UsersIcon,
   CommandIcon,
   ReceiptIcon,
+  FileTextIcon,
 } from "lucide-react"
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
@@ -48,6 +49,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       title: t("sidebar.projects"),
       url: "/app/projects",
       icon: <FolderIcon />,
+    },
+    {
+      title: t("sidebar.quotes"),
+      url: "/app/quotes",
+      icon: <FileTextIcon />,
     },
     {
       title: t("sidebar.expenses"),

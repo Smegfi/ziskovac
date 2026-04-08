@@ -17,12 +17,17 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppIndexRouteImport } from './routes/app/index'
 import { Route as AppTeamIndexRouteImport } from './routes/app/team/index'
 import { Route as AppSettingsIndexRouteImport } from './routes/app/settings/index'
+import { Route as AppQuotesIndexRouteImport } from './routes/app/quotes/index'
 import { Route as AppProjectsIndexRouteImport } from './routes/app/projects/index'
 import { Route as AppLifecycleIndexRouteImport } from './routes/app/lifecycle/index'
 import { Route as AppExpensesIndexRouteImport } from './routes/app/expenses/index'
 import { Route as AppDashboardIndexRouteImport } from './routes/app/dashboard/index'
 import { Route as AppAnalyticsIndexRouteImport } from './routes/app/analytics/index'
+import { Route as ApiQuotesIndexRouteImport } from './routes/api/quotes/index'
 import { Route as ApiExpensesIndexRouteImport } from './routes/api/expenses/index'
+import { Route as ApiQuotesSettingsRouteImport } from './routes/api/quotes/settings'
+import { Route as ApiQuotesCalculateRouteImport } from './routes/api/quotes/calculate'
+import { Route as ApiQuotesIdRouteImport } from './routes/api/quotes/$id'
 import { Route as ApiExpensesIdRouteImport } from './routes/api/expenses/$id'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as AppExpensesCategoriesIndexRouteImport } from './routes/app/expenses/categories/index'
@@ -69,6 +74,11 @@ const AppSettingsIndexRoute = AppSettingsIndexRouteImport.update({
   path: '/settings/',
   getParentRoute: () => AppRouteRoute,
 } as any)
+const AppQuotesIndexRoute = AppQuotesIndexRouteImport.update({
+  id: '/quotes/',
+  path: '/quotes/',
+  getParentRoute: () => AppRouteRoute,
+} as any)
 const AppProjectsIndexRoute = AppProjectsIndexRouteImport.update({
   id: '/projects/',
   path: '/projects/',
@@ -94,9 +104,29 @@ const AppAnalyticsIndexRoute = AppAnalyticsIndexRouteImport.update({
   path: '/analytics/',
   getParentRoute: () => AppRouteRoute,
 } as any)
+const ApiQuotesIndexRoute = ApiQuotesIndexRouteImport.update({
+  id: '/api/quotes/',
+  path: '/api/quotes/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiExpensesIndexRoute = ApiExpensesIndexRouteImport.update({
   id: '/api/expenses/',
   path: '/api/expenses/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiQuotesSettingsRoute = ApiQuotesSettingsRouteImport.update({
+  id: '/api/quotes/settings',
+  path: '/api/quotes/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiQuotesCalculateRoute = ApiQuotesCalculateRouteImport.update({
+  id: '/api/quotes/calculate',
+  path: '/api/quotes/calculate',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiQuotesIdRoute = ApiQuotesIdRouteImport.update({
+  id: '/api/quotes/$id',
+  path: '/api/quotes/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiExpensesIdRoute = ApiExpensesIdRouteImport.update({
@@ -136,12 +166,17 @@ export interface FileRoutesByFullPath {
   '/app/': typeof AppIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/expenses/$id': typeof ApiExpensesIdRoute
+  '/api/quotes/$id': typeof ApiQuotesIdRoute
+  '/api/quotes/calculate': typeof ApiQuotesCalculateRoute
+  '/api/quotes/settings': typeof ApiQuotesSettingsRoute
   '/api/expenses/': typeof ApiExpensesIndexRoute
+  '/api/quotes/': typeof ApiQuotesIndexRoute
   '/app/analytics/': typeof AppAnalyticsIndexRoute
   '/app/dashboard/': typeof AppDashboardIndexRoute
   '/app/expenses/': typeof AppExpensesIndexRoute
   '/app/lifecycle/': typeof AppLifecycleIndexRoute
   '/app/projects/': typeof AppProjectsIndexRoute
+  '/app/quotes/': typeof AppQuotesIndexRoute
   '/app/settings/': typeof AppSettingsIndexRoute
   '/app/team/': typeof AppTeamIndexRoute
   '/api/expenses/categories/$id': typeof ApiExpensesCategoriesIdRoute
@@ -156,12 +191,17 @@ export interface FileRoutesByTo {
   '/app': typeof AppIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/expenses/$id': typeof ApiExpensesIdRoute
+  '/api/quotes/$id': typeof ApiQuotesIdRoute
+  '/api/quotes/calculate': typeof ApiQuotesCalculateRoute
+  '/api/quotes/settings': typeof ApiQuotesSettingsRoute
   '/api/expenses': typeof ApiExpensesIndexRoute
+  '/api/quotes': typeof ApiQuotesIndexRoute
   '/app/analytics': typeof AppAnalyticsIndexRoute
   '/app/dashboard': typeof AppDashboardIndexRoute
   '/app/expenses': typeof AppExpensesIndexRoute
   '/app/lifecycle': typeof AppLifecycleIndexRoute
   '/app/projects': typeof AppProjectsIndexRoute
+  '/app/quotes': typeof AppQuotesIndexRoute
   '/app/settings': typeof AppSettingsIndexRoute
   '/app/team': typeof AppTeamIndexRoute
   '/api/expenses/categories/$id': typeof ApiExpensesCategoriesIdRoute
@@ -178,12 +218,17 @@ export interface FileRoutesById {
   '/app/': typeof AppIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/expenses/$id': typeof ApiExpensesIdRoute
+  '/api/quotes/$id': typeof ApiQuotesIdRoute
+  '/api/quotes/calculate': typeof ApiQuotesCalculateRoute
+  '/api/quotes/settings': typeof ApiQuotesSettingsRoute
   '/api/expenses/': typeof ApiExpensesIndexRoute
+  '/api/quotes/': typeof ApiQuotesIndexRoute
   '/app/analytics/': typeof AppAnalyticsIndexRoute
   '/app/dashboard/': typeof AppDashboardIndexRoute
   '/app/expenses/': typeof AppExpensesIndexRoute
   '/app/lifecycle/': typeof AppLifecycleIndexRoute
   '/app/projects/': typeof AppProjectsIndexRoute
+  '/app/quotes/': typeof AppQuotesIndexRoute
   '/app/settings/': typeof AppSettingsIndexRoute
   '/app/team/': typeof AppTeamIndexRoute
   '/api/expenses/categories/$id': typeof ApiExpensesCategoriesIdRoute
@@ -201,12 +246,17 @@ export interface FileRouteTypes {
     | '/app/'
     | '/api/auth/$'
     | '/api/expenses/$id'
+    | '/api/quotes/$id'
+    | '/api/quotes/calculate'
+    | '/api/quotes/settings'
     | '/api/expenses/'
+    | '/api/quotes/'
     | '/app/analytics/'
     | '/app/dashboard/'
     | '/app/expenses/'
     | '/app/lifecycle/'
     | '/app/projects/'
+    | '/app/quotes/'
     | '/app/settings/'
     | '/app/team/'
     | '/api/expenses/categories/$id'
@@ -221,12 +271,17 @@ export interface FileRouteTypes {
     | '/app'
     | '/api/auth/$'
     | '/api/expenses/$id'
+    | '/api/quotes/$id'
+    | '/api/quotes/calculate'
+    | '/api/quotes/settings'
     | '/api/expenses'
+    | '/api/quotes'
     | '/app/analytics'
     | '/app/dashboard'
     | '/app/expenses'
     | '/app/lifecycle'
     | '/app/projects'
+    | '/app/quotes'
     | '/app/settings'
     | '/app/team'
     | '/api/expenses/categories/$id'
@@ -242,12 +297,17 @@ export interface FileRouteTypes {
     | '/app/'
     | '/api/auth/$'
     | '/api/expenses/$id'
+    | '/api/quotes/$id'
+    | '/api/quotes/calculate'
+    | '/api/quotes/settings'
     | '/api/expenses/'
+    | '/api/quotes/'
     | '/app/analytics/'
     | '/app/dashboard/'
     | '/app/expenses/'
     | '/app/lifecycle/'
     | '/app/projects/'
+    | '/app/quotes/'
     | '/app/settings/'
     | '/app/team/'
     | '/api/expenses/categories/$id'
@@ -263,7 +323,11 @@ export interface RootRouteChildren {
   RegisterRoute: typeof RegisterRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
   ApiExpensesIdRoute: typeof ApiExpensesIdRoute
+  ApiQuotesIdRoute: typeof ApiQuotesIdRoute
+  ApiQuotesCalculateRoute: typeof ApiQuotesCalculateRoute
+  ApiQuotesSettingsRoute: typeof ApiQuotesSettingsRoute
   ApiExpensesIndexRoute: typeof ApiExpensesIndexRoute
+  ApiQuotesIndexRoute: typeof ApiQuotesIndexRoute
   ApiExpensesCategoriesIdRoute: typeof ApiExpensesCategoriesIdRoute
   ApiExpensesCategoriesIndexRoute: typeof ApiExpensesCategoriesIndexRoute
 }
@@ -326,6 +390,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppSettingsIndexRouteImport
       parentRoute: typeof AppRouteRoute
     }
+    '/app/quotes/': {
+      id: '/app/quotes/'
+      path: '/quotes'
+      fullPath: '/app/quotes/'
+      preLoaderRoute: typeof AppQuotesIndexRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
     '/app/projects/': {
       id: '/app/projects/'
       path: '/projects'
@@ -361,11 +432,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppAnalyticsIndexRouteImport
       parentRoute: typeof AppRouteRoute
     }
+    '/api/quotes/': {
+      id: '/api/quotes/'
+      path: '/api/quotes'
+      fullPath: '/api/quotes/'
+      preLoaderRoute: typeof ApiQuotesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/expenses/': {
       id: '/api/expenses/'
       path: '/api/expenses'
       fullPath: '/api/expenses/'
       preLoaderRoute: typeof ApiExpensesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/quotes/settings': {
+      id: '/api/quotes/settings'
+      path: '/api/quotes/settings'
+      fullPath: '/api/quotes/settings'
+      preLoaderRoute: typeof ApiQuotesSettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/quotes/calculate': {
+      id: '/api/quotes/calculate'
+      path: '/api/quotes/calculate'
+      fullPath: '/api/quotes/calculate'
+      preLoaderRoute: typeof ApiQuotesCalculateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/quotes/$id': {
+      id: '/api/quotes/$id'
+      path: '/api/quotes/$id'
+      fullPath: '/api/quotes/$id'
+      preLoaderRoute: typeof ApiQuotesIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/expenses/$id': {
@@ -413,6 +512,7 @@ interface AppRouteRouteChildren {
   AppExpensesIndexRoute: typeof AppExpensesIndexRoute
   AppLifecycleIndexRoute: typeof AppLifecycleIndexRoute
   AppProjectsIndexRoute: typeof AppProjectsIndexRoute
+  AppQuotesIndexRoute: typeof AppQuotesIndexRoute
   AppSettingsIndexRoute: typeof AppSettingsIndexRoute
   AppTeamIndexRoute: typeof AppTeamIndexRoute
   AppExpensesCategoriesIndexRoute: typeof AppExpensesCategoriesIndexRoute
@@ -425,6 +525,7 @@ const AppRouteRouteChildren: AppRouteRouteChildren = {
   AppExpensesIndexRoute: AppExpensesIndexRoute,
   AppLifecycleIndexRoute: AppLifecycleIndexRoute,
   AppProjectsIndexRoute: AppProjectsIndexRoute,
+  AppQuotesIndexRoute: AppQuotesIndexRoute,
   AppSettingsIndexRoute: AppSettingsIndexRoute,
   AppTeamIndexRoute: AppTeamIndexRoute,
   AppExpensesCategoriesIndexRoute: AppExpensesCategoriesIndexRoute,
@@ -442,7 +543,11 @@ const rootRouteChildren: RootRouteChildren = {
   RegisterRoute: RegisterRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
   ApiExpensesIdRoute: ApiExpensesIdRoute,
+  ApiQuotesIdRoute: ApiQuotesIdRoute,
+  ApiQuotesCalculateRoute: ApiQuotesCalculateRoute,
+  ApiQuotesSettingsRoute: ApiQuotesSettingsRoute,
   ApiExpensesIndexRoute: ApiExpensesIndexRoute,
+  ApiQuotesIndexRoute: ApiQuotesIndexRoute,
   ApiExpensesCategoriesIdRoute: ApiExpensesCategoriesIdRoute,
   ApiExpensesCategoriesIndexRoute: ApiExpensesCategoriesIndexRoute,
 }
