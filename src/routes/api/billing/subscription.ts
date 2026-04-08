@@ -86,16 +86,24 @@ export const Route = createFileRoute("/api/billing/subscription")({
               .values({
                 userId,
                 plan,
-                status: "active",
+                status: plan === "free" ? "active" : "incomplete",
               })
               .returning()
 
             subscription = newSubscription
           } else {
             // Update existing subscription
+            // If upgrading from free, status should be incomplete until payment
+            // If downgrading to free, status should be active
+            const newStatus = plan === "free" ? "active" : subscription.status
+
             const [updated] = await db
               .update(schema.subscription)
-              .set({ plan, updatedAt: new Date() })
+              .set({
+                plan,
+                status: newStatus,
+                updatedAt: new Date(),
+              })
               .where(eq(schema.subscription.id, subscription.id))
               .returning()
 

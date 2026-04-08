@@ -118,31 +118,126 @@ export async function verifyWebhookSignature(
 
 /**
  * Handle Stripe webhook events
+ * Updates subscription status and handles lifecycle events
  */
 export async function handleStripeWebhookEvent(event: any): Promise<void> {
   const eventType = event.type
 
+  // Import db here to avoid circular dependencies
+  const { db } = await import("./db")
+  const { eq } = await import("drizzle-orm")
+  const schema = await import("./schema")
+
   switch (eventType) {
     case "customer.subscription.created":
-    case "customer.subscription.updated":
-      // Handle subscription creation or update
-      console.log("Subscription event:", event.data.object)
-      break
+    case "customer.subscription.updated": {
+      const subscription = event.data.object
+      const customerId = subscription.customer
+      const userId = subscription.metadata?.userId
 
-    case "customer.subscription.deleted":
-      // Handle subscription cancellation
-      console.log("Subscription cancelled:", event.data.object)
-      break
+      if (!userId) {
+        console.warn("Missing userId in subscription metadata")
+        break
+      }
 
-    case "invoice.paid":
-      // Handle successful payment
-      console.log("Invoice paid:", event.data.object)
-      break
+      try {
+        await db
+          .update(schema.subscription)
+          .set({
+            stripeSubscriptionId: subscription.id,
+            stripeCustomerId: customerId,
+            stripePriceId: subscription.items?.data?.[0]?.price?.id,
+            status: subscription.status,
+            currentPeriodStart: new Date(subscription.current_period_start * 1000),
+            currentPeriodEnd: new Date(subscription.current_period_end * 1000),
+            nextBillingDate: new Date(subscription.current_period_end * 1000),
+            updatedAt: new Date(),
+          })
+          .where(eq(schema.subscription.userId, userId))
 
-    case "invoice.payment_failed":
-      // Handle failed payment
-      console.log("Payment failed:", event.data.object)
+        console.log(`Subscription ${eventType} processed for user ${userId}`)
+      } catch (error) {
+        console.error(`Error processing subscription ${eventType}:`, error)
+      }
       break
+    }
+
+    case "customer.subscription.deleted": {
+      const subscription = event.data.object
+      const userId = subscription.metadata?.userId
+
+      if (!userId) {
+        console.warn("Missing userId in subscription metadata")
+        break
+      }
+
+      try {
+        await db
+          .update(schema.subscription)
+          .set({
+            status: "canceled",
+            canceledAt: new Date(),
+            updatedAt: new Date(),
+          })
+          .where(eq(schema.subscription.userId, userId))
+
+        console.log(`Subscription cancelled for user ${userId}`)
+      } catch (error) {
+        console.error("Error processing subscription cancellation:", error)
+      }
+      break
+    }
+
+    case "invoice.paid": {
+      const invoice = event.data.object
+      const customerId = invoice.customer
+      const userId = invoice.metadata?.userId
+
+      if (!customerId || !userId) {
+        console.warn("Missing customer or user ID in invoice")
+        break
+      }
+
+      try {
+        await db
+          .update(schema.subscription)
+          .set({
+            lastPaymentDate: new Date(invoice.created * 1000),
+            updatedAt: new Date(),
+          })
+          .where(eq(schema.subscription.stripeCustomerId, customerId))
+
+        console.log(`Invoice paid for user ${userId}`)
+      } catch (error) {
+        console.error("Error processing invoice.paid:", error)
+      }
+      break
+    }
+
+    case "invoice.payment_failed": {
+      const invoice = event.data.object
+      const customerId = invoice.customer
+
+      if (!customerId) {
+        console.warn("Missing customer ID in invoice")
+        break
+      }
+
+      try {
+        await db
+          .update(schema.subscription)
+          .set({
+            status: "past_due",
+            updatedAt: new Date(),
+          })
+          .where(eq(schema.subscription.stripeCustomerId, customerId))
+
+        console.log("Payment failed - subscription marked as past_due")
+      } catch (error) {
+        console.error("Error processing invoice.payment_failed:", error)
+      }
+      break
+    }
 
     default:
       console.log("Unhandled webhook event:", eventType)
