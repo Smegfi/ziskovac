@@ -26,16 +26,24 @@ import { Route as AppDashboardIndexRouteImport } from './routes/app/dashboard/in
 import { Route as AppAnalyticsIndexRouteImport } from './routes/app/analytics/index'
 import { Route as ApiQuotesIndexRouteImport } from './routes/api/quotes/index'
 import { Route as ApiExpensesIndexRouteImport } from './routes/api/expenses/index'
+import { Route as AppSettingsBillingRouteImport } from './routes/app/settings/billing'
 import { Route as ApiQuotesSettingsRouteImport } from './routes/api/quotes/settings'
 import { Route as ApiQuotesCalculateRouteImport } from './routes/api/quotes/calculate'
 import { Route as ApiQuotesIdRouteImport } from './routes/api/quotes/$id'
 import { Route as ApiExpensesIdRouteImport } from './routes/api/expenses/$id'
+import { Route as ApiBillingWebhookRouteImport } from './routes/api/billing/webhook'
+import { Route as ApiBillingSubscriptionRouteImport } from './routes/api/billing/subscription'
+import { Route as ApiBillingCheckoutSessionRouteImport } from './routes/api/billing/checkout-session'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
+import { Route as AppQuotesIdIndexRouteImport } from './routes/app/quotes/$id/index'
 import { Route as AppExpensesCategoriesIndexRouteImport } from './routes/app/expenses/categories/index'
+import { Route as ApiQuotesLineItemsIndexRouteImport } from './routes/api/quotes/line-items/index'
 import { Route as ApiOverheadCostsIndexRouteImport } from './routes/api/overhead/costs/index'
 import { Route as ApiOverheadCategoriesIndexRouteImport } from './routes/api/overhead/categories/index'
 import { Route as ApiExpensesCategoriesIndexRouteImport } from './routes/api/expenses/categories/index'
+import { Route as AppQuotesIdPreviewRouteImport } from './routes/app/quotes/$id/preview'
 import { Route as AppQuotesIdHistoryRouteImport } from './routes/app/quotes/$id/history'
+import { Route as ApiQuotesLineItemsIdRouteImport } from './routes/api/quotes/line-items/$id'
 import { Route as ApiOverheadCostsIdRouteImport } from './routes/api/overhead/costs/$id'
 import { Route as ApiExpensesCategoriesIdRouteImport } from './routes/api/expenses/categories/$id'
 
@@ -124,6 +132,11 @@ const ApiExpensesIndexRoute = ApiExpensesIndexRouteImport.update({
   path: '/api/expenses/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppSettingsBillingRoute = AppSettingsBillingRouteImport.update({
+  id: '/settings/billing',
+  path: '/settings/billing',
+  getParentRoute: () => AppRouteRoute,
+} as any)
 const ApiQuotesSettingsRoute = ApiQuotesSettingsRouteImport.update({
   id: '/api/quotes/settings',
   path: '/api/quotes/settings',
@@ -144,10 +157,31 @@ const ApiExpensesIdRoute = ApiExpensesIdRouteImport.update({
   path: '/api/expenses/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiBillingWebhookRoute = ApiBillingWebhookRouteImport.update({
+  id: '/api/billing/webhook',
+  path: '/api/billing/webhook',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiBillingSubscriptionRoute = ApiBillingSubscriptionRouteImport.update({
+  id: '/api/billing/subscription',
+  path: '/api/billing/subscription',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiBillingCheckoutSessionRoute =
+  ApiBillingCheckoutSessionRouteImport.update({
+    id: '/api/billing/checkout-session',
+    path: '/api/billing/checkout-session',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AppQuotesIdIndexRoute = AppQuotesIdIndexRouteImport.update({
+  id: '/quotes/$id/',
+  path: '/quotes/$id/',
+  getParentRoute: () => AppRouteRoute,
 } as any)
 const AppExpensesCategoriesIndexRoute =
   AppExpensesCategoriesIndexRouteImport.update({
@@ -155,6 +189,11 @@ const AppExpensesCategoriesIndexRoute =
     path: '/expenses/categories/',
     getParentRoute: () => AppRouteRoute,
   } as any)
+const ApiQuotesLineItemsIndexRoute = ApiQuotesLineItemsIndexRouteImport.update({
+  id: '/api/quotes/line-items/',
+  path: '/api/quotes/line-items/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiOverheadCostsIndexRoute = ApiOverheadCostsIndexRouteImport.update({
   id: '/api/overhead/costs/',
   path: '/api/overhead/costs/',
@@ -172,10 +211,20 @@ const ApiExpensesCategoriesIndexRoute =
     path: '/api/expenses/categories/',
     getParentRoute: () => rootRouteImport,
   } as any)
+const AppQuotesIdPreviewRoute = AppQuotesIdPreviewRouteImport.update({
+  id: '/quotes/$id/preview',
+  path: '/quotes/$id/preview',
+  getParentRoute: () => AppRouteRoute,
+} as any)
 const AppQuotesIdHistoryRoute = AppQuotesIdHistoryRouteImport.update({
   id: '/quotes/$id/history',
   path: '/quotes/$id/history',
   getParentRoute: () => AppRouteRoute,
+} as any)
+const ApiQuotesLineItemsIdRoute = ApiQuotesLineItemsIdRouteImport.update({
+  id: '/api/quotes/line-items/$id',
+  path: '/api/quotes/line-items/$id',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ApiOverheadCostsIdRoute = ApiOverheadCostsIdRouteImport.update({
   id: '/api/overhead/costs/$id',
@@ -196,10 +245,14 @@ export interface FileRoutesByFullPath {
   '/register': typeof RegisterRoute
   '/app/': typeof AppIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/billing/checkout-session': typeof ApiBillingCheckoutSessionRoute
+  '/api/billing/subscription': typeof ApiBillingSubscriptionRoute
+  '/api/billing/webhook': typeof ApiBillingWebhookRoute
   '/api/expenses/$id': typeof ApiExpensesIdRoute
   '/api/quotes/$id': typeof ApiQuotesIdRoute
   '/api/quotes/calculate': typeof ApiQuotesCalculateRoute
   '/api/quotes/settings': typeof ApiQuotesSettingsRoute
+  '/app/settings/billing': typeof AppSettingsBillingRoute
   '/api/expenses/': typeof ApiExpensesIndexRoute
   '/api/quotes/': typeof ApiQuotesIndexRoute
   '/app/analytics/': typeof AppAnalyticsIndexRoute
@@ -213,11 +266,15 @@ export interface FileRoutesByFullPath {
   '/app/team/': typeof AppTeamIndexRoute
   '/api/expenses/categories/$id': typeof ApiExpensesCategoriesIdRoute
   '/api/overhead/costs/$id': typeof ApiOverheadCostsIdRoute
+  '/api/quotes/line-items/$id': typeof ApiQuotesLineItemsIdRoute
   '/app/quotes/$id/history': typeof AppQuotesIdHistoryRoute
+  '/app/quotes/$id/preview': typeof AppQuotesIdPreviewRoute
   '/api/expenses/categories/': typeof ApiExpensesCategoriesIndexRoute
   '/api/overhead/categories/': typeof ApiOverheadCategoriesIndexRoute
   '/api/overhead/costs/': typeof ApiOverheadCostsIndexRoute
+  '/api/quotes/line-items/': typeof ApiQuotesLineItemsIndexRoute
   '/app/expenses/categories/': typeof AppExpensesCategoriesIndexRoute
+  '/app/quotes/$id/': typeof AppQuotesIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -226,10 +283,14 @@ export interface FileRoutesByTo {
   '/register': typeof RegisterRoute
   '/app': typeof AppIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/billing/checkout-session': typeof ApiBillingCheckoutSessionRoute
+  '/api/billing/subscription': typeof ApiBillingSubscriptionRoute
+  '/api/billing/webhook': typeof ApiBillingWebhookRoute
   '/api/expenses/$id': typeof ApiExpensesIdRoute
   '/api/quotes/$id': typeof ApiQuotesIdRoute
   '/api/quotes/calculate': typeof ApiQuotesCalculateRoute
   '/api/quotes/settings': typeof ApiQuotesSettingsRoute
+  '/app/settings/billing': typeof AppSettingsBillingRoute
   '/api/expenses': typeof ApiExpensesIndexRoute
   '/api/quotes': typeof ApiQuotesIndexRoute
   '/app/analytics': typeof AppAnalyticsIndexRoute
@@ -243,11 +304,15 @@ export interface FileRoutesByTo {
   '/app/team': typeof AppTeamIndexRoute
   '/api/expenses/categories/$id': typeof ApiExpensesCategoriesIdRoute
   '/api/overhead/costs/$id': typeof ApiOverheadCostsIdRoute
+  '/api/quotes/line-items/$id': typeof ApiQuotesLineItemsIdRoute
   '/app/quotes/$id/history': typeof AppQuotesIdHistoryRoute
+  '/app/quotes/$id/preview': typeof AppQuotesIdPreviewRoute
   '/api/expenses/categories': typeof ApiExpensesCategoriesIndexRoute
   '/api/overhead/categories': typeof ApiOverheadCategoriesIndexRoute
   '/api/overhead/costs': typeof ApiOverheadCostsIndexRoute
+  '/api/quotes/line-items': typeof ApiQuotesLineItemsIndexRoute
   '/app/expenses/categories': typeof AppExpensesCategoriesIndexRoute
+  '/app/quotes/$id': typeof AppQuotesIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -258,10 +323,14 @@ export interface FileRoutesById {
   '/register': typeof RegisterRoute
   '/app/': typeof AppIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/billing/checkout-session': typeof ApiBillingCheckoutSessionRoute
+  '/api/billing/subscription': typeof ApiBillingSubscriptionRoute
+  '/api/billing/webhook': typeof ApiBillingWebhookRoute
   '/api/expenses/$id': typeof ApiExpensesIdRoute
   '/api/quotes/$id': typeof ApiQuotesIdRoute
   '/api/quotes/calculate': typeof ApiQuotesCalculateRoute
   '/api/quotes/settings': typeof ApiQuotesSettingsRoute
+  '/app/settings/billing': typeof AppSettingsBillingRoute
   '/api/expenses/': typeof ApiExpensesIndexRoute
   '/api/quotes/': typeof ApiQuotesIndexRoute
   '/app/analytics/': typeof AppAnalyticsIndexRoute
@@ -275,11 +344,15 @@ export interface FileRoutesById {
   '/app/team/': typeof AppTeamIndexRoute
   '/api/expenses/categories/$id': typeof ApiExpensesCategoriesIdRoute
   '/api/overhead/costs/$id': typeof ApiOverheadCostsIdRoute
+  '/api/quotes/line-items/$id': typeof ApiQuotesLineItemsIdRoute
   '/app/quotes/$id/history': typeof AppQuotesIdHistoryRoute
+  '/app/quotes/$id/preview': typeof AppQuotesIdPreviewRoute
   '/api/expenses/categories/': typeof ApiExpensesCategoriesIndexRoute
   '/api/overhead/categories/': typeof ApiOverheadCategoriesIndexRoute
   '/api/overhead/costs/': typeof ApiOverheadCostsIndexRoute
+  '/api/quotes/line-items/': typeof ApiQuotesLineItemsIndexRoute
   '/app/expenses/categories/': typeof AppExpensesCategoriesIndexRoute
+  '/app/quotes/$id/': typeof AppQuotesIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -291,10 +364,14 @@ export interface FileRouteTypes {
     | '/register'
     | '/app/'
     | '/api/auth/$'
+    | '/api/billing/checkout-session'
+    | '/api/billing/subscription'
+    | '/api/billing/webhook'
     | '/api/expenses/$id'
     | '/api/quotes/$id'
     | '/api/quotes/calculate'
     | '/api/quotes/settings'
+    | '/app/settings/billing'
     | '/api/expenses/'
     | '/api/quotes/'
     | '/app/analytics/'
@@ -308,11 +385,15 @@ export interface FileRouteTypes {
     | '/app/team/'
     | '/api/expenses/categories/$id'
     | '/api/overhead/costs/$id'
+    | '/api/quotes/line-items/$id'
     | '/app/quotes/$id/history'
+    | '/app/quotes/$id/preview'
     | '/api/expenses/categories/'
     | '/api/overhead/categories/'
     | '/api/overhead/costs/'
+    | '/api/quotes/line-items/'
     | '/app/expenses/categories/'
+    | '/app/quotes/$id/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -321,10 +402,14 @@ export interface FileRouteTypes {
     | '/register'
     | '/app'
     | '/api/auth/$'
+    | '/api/billing/checkout-session'
+    | '/api/billing/subscription'
+    | '/api/billing/webhook'
     | '/api/expenses/$id'
     | '/api/quotes/$id'
     | '/api/quotes/calculate'
     | '/api/quotes/settings'
+    | '/app/settings/billing'
     | '/api/expenses'
     | '/api/quotes'
     | '/app/analytics'
@@ -338,11 +423,15 @@ export interface FileRouteTypes {
     | '/app/team'
     | '/api/expenses/categories/$id'
     | '/api/overhead/costs/$id'
+    | '/api/quotes/line-items/$id'
     | '/app/quotes/$id/history'
+    | '/app/quotes/$id/preview'
     | '/api/expenses/categories'
     | '/api/overhead/categories'
     | '/api/overhead/costs'
+    | '/api/quotes/line-items'
     | '/app/expenses/categories'
+    | '/app/quotes/$id'
   id:
     | '__root__'
     | '/'
@@ -352,10 +441,14 @@ export interface FileRouteTypes {
     | '/register'
     | '/app/'
     | '/api/auth/$'
+    | '/api/billing/checkout-session'
+    | '/api/billing/subscription'
+    | '/api/billing/webhook'
     | '/api/expenses/$id'
     | '/api/quotes/$id'
     | '/api/quotes/calculate'
     | '/api/quotes/settings'
+    | '/app/settings/billing'
     | '/api/expenses/'
     | '/api/quotes/'
     | '/app/analytics/'
@@ -369,11 +462,15 @@ export interface FileRouteTypes {
     | '/app/team/'
     | '/api/expenses/categories/$id'
     | '/api/overhead/costs/$id'
+    | '/api/quotes/line-items/$id'
     | '/app/quotes/$id/history'
+    | '/app/quotes/$id/preview'
     | '/api/expenses/categories/'
     | '/api/overhead/categories/'
     | '/api/overhead/costs/'
+    | '/api/quotes/line-items/'
     | '/app/expenses/categories/'
+    | '/app/quotes/$id/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -383,6 +480,9 @@ export interface RootRouteChildren {
   OnboardingRoute: typeof OnboardingRoute
   RegisterRoute: typeof RegisterRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  ApiBillingCheckoutSessionRoute: typeof ApiBillingCheckoutSessionRoute
+  ApiBillingSubscriptionRoute: typeof ApiBillingSubscriptionRoute
+  ApiBillingWebhookRoute: typeof ApiBillingWebhookRoute
   ApiExpensesIdRoute: typeof ApiExpensesIdRoute
   ApiQuotesIdRoute: typeof ApiQuotesIdRoute
   ApiQuotesCalculateRoute: typeof ApiQuotesCalculateRoute
@@ -391,9 +491,11 @@ export interface RootRouteChildren {
   ApiQuotesIndexRoute: typeof ApiQuotesIndexRoute
   ApiExpensesCategoriesIdRoute: typeof ApiExpensesCategoriesIdRoute
   ApiOverheadCostsIdRoute: typeof ApiOverheadCostsIdRoute
+  ApiQuotesLineItemsIdRoute: typeof ApiQuotesLineItemsIdRoute
   ApiExpensesCategoriesIndexRoute: typeof ApiExpensesCategoriesIndexRoute
   ApiOverheadCategoriesIndexRoute: typeof ApiOverheadCategoriesIndexRoute
   ApiOverheadCostsIndexRoute: typeof ApiOverheadCostsIndexRoute
+  ApiQuotesLineItemsIndexRoute: typeof ApiQuotesLineItemsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -517,6 +619,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiExpensesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app/settings/billing': {
+      id: '/app/settings/billing'
+      path: '/settings/billing'
+      fullPath: '/app/settings/billing'
+      preLoaderRoute: typeof AppSettingsBillingRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
     '/api/quotes/settings': {
       id: '/api/quotes/settings'
       path: '/api/quotes/settings'
@@ -545,6 +654,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiExpensesIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/billing/webhook': {
+      id: '/api/billing/webhook'
+      path: '/api/billing/webhook'
+      fullPath: '/api/billing/webhook'
+      preLoaderRoute: typeof ApiBillingWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/billing/subscription': {
+      id: '/api/billing/subscription'
+      path: '/api/billing/subscription'
+      fullPath: '/api/billing/subscription'
+      preLoaderRoute: typeof ApiBillingSubscriptionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/billing/checkout-session': {
+      id: '/api/billing/checkout-session'
+      path: '/api/billing/checkout-session'
+      fullPath: '/api/billing/checkout-session'
+      preLoaderRoute: typeof ApiBillingCheckoutSessionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/auth/$': {
       id: '/api/auth/$'
       path: '/api/auth/$'
@@ -552,12 +682,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAuthSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app/quotes/$id/': {
+      id: '/app/quotes/$id/'
+      path: '/quotes/$id'
+      fullPath: '/app/quotes/$id/'
+      preLoaderRoute: typeof AppQuotesIdIndexRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
     '/app/expenses/categories/': {
       id: '/app/expenses/categories/'
       path: '/expenses/categories'
       fullPath: '/app/expenses/categories/'
       preLoaderRoute: typeof AppExpensesCategoriesIndexRouteImport
       parentRoute: typeof AppRouteRoute
+    }
+    '/api/quotes/line-items/': {
+      id: '/api/quotes/line-items/'
+      path: '/api/quotes/line-items'
+      fullPath: '/api/quotes/line-items/'
+      preLoaderRoute: typeof ApiQuotesLineItemsIndexRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/api/overhead/costs/': {
       id: '/api/overhead/costs/'
@@ -580,12 +724,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiExpensesCategoriesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app/quotes/$id/preview': {
+      id: '/app/quotes/$id/preview'
+      path: '/quotes/$id/preview'
+      fullPath: '/app/quotes/$id/preview'
+      preLoaderRoute: typeof AppQuotesIdPreviewRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
     '/app/quotes/$id/history': {
       id: '/app/quotes/$id/history'
       path: '/quotes/$id/history'
       fullPath: '/app/quotes/$id/history'
       preLoaderRoute: typeof AppQuotesIdHistoryRouteImport
       parentRoute: typeof AppRouteRoute
+    }
+    '/api/quotes/line-items/$id': {
+      id: '/api/quotes/line-items/$id'
+      path: '/api/quotes/line-items/$id'
+      fullPath: '/api/quotes/line-items/$id'
+      preLoaderRoute: typeof ApiQuotesLineItemsIdRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/api/overhead/costs/$id': {
       id: '/api/overhead/costs/$id'
@@ -606,6 +764,7 @@ declare module '@tanstack/react-router' {
 
 interface AppRouteRouteChildren {
   AppIndexRoute: typeof AppIndexRoute
+  AppSettingsBillingRoute: typeof AppSettingsBillingRoute
   AppAnalyticsIndexRoute: typeof AppAnalyticsIndexRoute
   AppDashboardIndexRoute: typeof AppDashboardIndexRoute
   AppExpensesIndexRoute: typeof AppExpensesIndexRoute
@@ -616,11 +775,14 @@ interface AppRouteRouteChildren {
   AppSettingsIndexRoute: typeof AppSettingsIndexRoute
   AppTeamIndexRoute: typeof AppTeamIndexRoute
   AppQuotesIdHistoryRoute: typeof AppQuotesIdHistoryRoute
+  AppQuotesIdPreviewRoute: typeof AppQuotesIdPreviewRoute
   AppExpensesCategoriesIndexRoute: typeof AppExpensesCategoriesIndexRoute
+  AppQuotesIdIndexRoute: typeof AppQuotesIdIndexRoute
 }
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
   AppIndexRoute: AppIndexRoute,
+  AppSettingsBillingRoute: AppSettingsBillingRoute,
   AppAnalyticsIndexRoute: AppAnalyticsIndexRoute,
   AppDashboardIndexRoute: AppDashboardIndexRoute,
   AppExpensesIndexRoute: AppExpensesIndexRoute,
@@ -631,7 +793,9 @@ const AppRouteRouteChildren: AppRouteRouteChildren = {
   AppSettingsIndexRoute: AppSettingsIndexRoute,
   AppTeamIndexRoute: AppTeamIndexRoute,
   AppQuotesIdHistoryRoute: AppQuotesIdHistoryRoute,
+  AppQuotesIdPreviewRoute: AppQuotesIdPreviewRoute,
   AppExpensesCategoriesIndexRoute: AppExpensesCategoriesIndexRoute,
+  AppQuotesIdIndexRoute: AppQuotesIdIndexRoute,
 }
 
 const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
@@ -645,6 +809,9 @@ const rootRouteChildren: RootRouteChildren = {
   OnboardingRoute: OnboardingRoute,
   RegisterRoute: RegisterRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
+  ApiBillingCheckoutSessionRoute: ApiBillingCheckoutSessionRoute,
+  ApiBillingSubscriptionRoute: ApiBillingSubscriptionRoute,
+  ApiBillingWebhookRoute: ApiBillingWebhookRoute,
   ApiExpensesIdRoute: ApiExpensesIdRoute,
   ApiQuotesIdRoute: ApiQuotesIdRoute,
   ApiQuotesCalculateRoute: ApiQuotesCalculateRoute,
@@ -653,9 +820,11 @@ const rootRouteChildren: RootRouteChildren = {
   ApiQuotesIndexRoute: ApiQuotesIndexRoute,
   ApiExpensesCategoriesIdRoute: ApiExpensesCategoriesIdRoute,
   ApiOverheadCostsIdRoute: ApiOverheadCostsIdRoute,
+  ApiQuotesLineItemsIdRoute: ApiQuotesLineItemsIdRoute,
   ApiExpensesCategoriesIndexRoute: ApiExpensesCategoriesIndexRoute,
   ApiOverheadCategoriesIndexRoute: ApiOverheadCategoriesIndexRoute,
   ApiOverheadCostsIndexRoute: ApiOverheadCostsIndexRoute,
+  ApiQuotesLineItemsIndexRoute: ApiQuotesLineItemsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
