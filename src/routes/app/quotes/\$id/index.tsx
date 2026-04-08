@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
-import { AlertCircle, ChevronLeft } from "lucide-react"
+import { AlertCircle, ChevronLeft, Eye } from "lucide-react"
 import { QuoteLineItemForm, type LineItemFormData } from "@/components/quote-line-item-form"
 import { QuoteLineItemTable, type LineItem } from "@/components/quote-line-item-table"
 
@@ -160,11 +160,21 @@ function QuoteDetailPage() {
 
   return (
     <div className="space-y-6 pb-8">
-      <div className="flex items-center gap-4">
+      <div className="flex items-center justify-between">
         <Button variant="ghost" size="sm" onClick={() => navigate({ to: "/app/quotes" })}>
           <ChevronLeft className="w-4 h-4 mr-2" />
           Back to Quotes
         </Button>
+        {lineItems.length > 0 && (
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => navigate({ to: `/app/quotes/${id}/preview` })}
+          >
+            <Eye className="w-4 h-4 mr-2" />
+            Preview & Export
+          </Button>
+        )}
       </div>
 
       {error && (
