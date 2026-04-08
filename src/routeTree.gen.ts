@@ -35,6 +35,7 @@ import { Route as AppExpensesCategoriesIndexRouteImport } from './routes/app/exp
 import { Route as ApiOverheadCostsIndexRouteImport } from './routes/api/overhead/costs/index'
 import { Route as ApiOverheadCategoriesIndexRouteImport } from './routes/api/overhead/categories/index'
 import { Route as ApiExpensesCategoriesIndexRouteImport } from './routes/api/expenses/categories/index'
+import { Route as AppQuotesIdHistoryRouteImport } from './routes/app/quotes/$id/history'
 import { Route as ApiOverheadCostsIdRouteImport } from './routes/api/overhead/costs/$id'
 import { Route as ApiExpensesCategoriesIdRouteImport } from './routes/api/expenses/categories/$id'
 
@@ -171,6 +172,11 @@ const ApiExpensesCategoriesIndexRoute =
     path: '/api/expenses/categories/',
     getParentRoute: () => rootRouteImport,
   } as any)
+const AppQuotesIdHistoryRoute = AppQuotesIdHistoryRouteImport.update({
+  id: '/quotes/$id/history',
+  path: '/quotes/$id/history',
+  getParentRoute: () => AppRouteRoute,
+} as any)
 const ApiOverheadCostsIdRoute = ApiOverheadCostsIdRouteImport.update({
   id: '/api/overhead/costs/$id',
   path: '/api/overhead/costs/$id',
@@ -207,6 +213,7 @@ export interface FileRoutesByFullPath {
   '/app/team/': typeof AppTeamIndexRoute
   '/api/expenses/categories/$id': typeof ApiExpensesCategoriesIdRoute
   '/api/overhead/costs/$id': typeof ApiOverheadCostsIdRoute
+  '/app/quotes/$id/history': typeof AppQuotesIdHistoryRoute
   '/api/expenses/categories/': typeof ApiExpensesCategoriesIndexRoute
   '/api/overhead/categories/': typeof ApiOverheadCategoriesIndexRoute
   '/api/overhead/costs/': typeof ApiOverheadCostsIndexRoute
@@ -236,6 +243,7 @@ export interface FileRoutesByTo {
   '/app/team': typeof AppTeamIndexRoute
   '/api/expenses/categories/$id': typeof ApiExpensesCategoriesIdRoute
   '/api/overhead/costs/$id': typeof ApiOverheadCostsIdRoute
+  '/app/quotes/$id/history': typeof AppQuotesIdHistoryRoute
   '/api/expenses/categories': typeof ApiExpensesCategoriesIndexRoute
   '/api/overhead/categories': typeof ApiOverheadCategoriesIndexRoute
   '/api/overhead/costs': typeof ApiOverheadCostsIndexRoute
@@ -267,6 +275,7 @@ export interface FileRoutesById {
   '/app/team/': typeof AppTeamIndexRoute
   '/api/expenses/categories/$id': typeof ApiExpensesCategoriesIdRoute
   '/api/overhead/costs/$id': typeof ApiOverheadCostsIdRoute
+  '/app/quotes/$id/history': typeof AppQuotesIdHistoryRoute
   '/api/expenses/categories/': typeof ApiExpensesCategoriesIndexRoute
   '/api/overhead/categories/': typeof ApiOverheadCategoriesIndexRoute
   '/api/overhead/costs/': typeof ApiOverheadCostsIndexRoute
@@ -299,6 +308,7 @@ export interface FileRouteTypes {
     | '/app/team/'
     | '/api/expenses/categories/$id'
     | '/api/overhead/costs/$id'
+    | '/app/quotes/$id/history'
     | '/api/expenses/categories/'
     | '/api/overhead/categories/'
     | '/api/overhead/costs/'
@@ -328,6 +338,7 @@ export interface FileRouteTypes {
     | '/app/team'
     | '/api/expenses/categories/$id'
     | '/api/overhead/costs/$id'
+    | '/app/quotes/$id/history'
     | '/api/expenses/categories'
     | '/api/overhead/categories'
     | '/api/overhead/costs'
@@ -358,6 +369,7 @@ export interface FileRouteTypes {
     | '/app/team/'
     | '/api/expenses/categories/$id'
     | '/api/overhead/costs/$id'
+    | '/app/quotes/$id/history'
     | '/api/expenses/categories/'
     | '/api/overhead/categories/'
     | '/api/overhead/costs/'
@@ -568,6 +580,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiExpensesCategoriesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app/quotes/$id/history': {
+      id: '/app/quotes/$id/history'
+      path: '/quotes/$id/history'
+      fullPath: '/app/quotes/$id/history'
+      preLoaderRoute: typeof AppQuotesIdHistoryRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
     '/api/overhead/costs/$id': {
       id: '/api/overhead/costs/$id'
       path: '/api/overhead/costs/$id'
@@ -596,6 +615,7 @@ interface AppRouteRouteChildren {
   AppQuotesIndexRoute: typeof AppQuotesIndexRoute
   AppSettingsIndexRoute: typeof AppSettingsIndexRoute
   AppTeamIndexRoute: typeof AppTeamIndexRoute
+  AppQuotesIdHistoryRoute: typeof AppQuotesIdHistoryRoute
   AppExpensesCategoriesIndexRoute: typeof AppExpensesCategoriesIndexRoute
 }
 
@@ -610,6 +630,7 @@ const AppRouteRouteChildren: AppRouteRouteChildren = {
   AppQuotesIndexRoute: AppQuotesIndexRoute,
   AppSettingsIndexRoute: AppSettingsIndexRoute,
   AppTeamIndexRoute: AppTeamIndexRoute,
+  AppQuotesIdHistoryRoute: AppQuotesIdHistoryRoute,
   AppExpensesCategoriesIndexRoute: AppExpensesCategoriesIndexRoute,
 }
 

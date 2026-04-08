@@ -22,6 +22,8 @@ interface Quote {
   customRate?: number
   netProfit?: number
   currency: string
+  version?: number
+  updatedAt?: string
 }
 
 function QuotesPage() {
@@ -395,14 +397,20 @@ function QuotesPage() {
           </CardHeader>
           <CardContent className="space-y-2">
             {quotes.map((quote) => (
-              <div key={quote.id} className="flex items-center justify-between p-3 border rounded hover:bg-gray-50 cursor-pointer">
-                <div>
+              <div key={quote.id} className="flex items-center justify-between p-3 border rounded hover:bg-gray-50">
+                <div className="flex-1">
                   <p className="font-medium">{quote.title}</p>
                   {quote.clientName && <p className="text-sm text-muted-foreground">{quote.clientName}</p>}
+                  <p className="text-xs text-gray-500 mt-1">v{quote.version || 1} • {quote.updatedAt ? new Date(quote.updatedAt).toLocaleDateString() : "No date"}</p>
                 </div>
-                <div className="text-right">
+                <div className="text-right space-y-1">
                   {quote.netProfit && <p className="font-bold text-green-600">{quote.netProfit} CZK</p>}
-                  <ChevronRight className="h-4 w-4 text-gray-400" />
+                  <div className="flex gap-1 justify-end">
+                    <Button variant="ghost" size="sm" onClick={() => window.location.href = `/app/quotes/${quote.id}/history`}>
+                      History
+                    </Button>
+                    <ChevronRight className="h-4 w-4 text-gray-400 self-center" />
+                  </div>
                 </div>
               </div>
             ))}
