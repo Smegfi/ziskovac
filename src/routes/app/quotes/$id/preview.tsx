@@ -30,7 +30,8 @@ interface LineItem {
 }
 
 function QuotePreviewPage() {
-  const { id } = Route.useParams()
+  const params = Route.useParams() as { id: string }
+  const id = params.id
   const navigate = Route.useNavigate()
 
   const [quote, setQuote] = useState<Quote | null>(null)

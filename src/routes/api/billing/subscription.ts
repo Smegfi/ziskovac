@@ -3,7 +3,7 @@ import { auth } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { eq } from "drizzle-orm"
 import * as schema from "@/lib/schema"
-import { STRIPE_PLANS, SubscriptionPlan } from "@/lib/stripe"
+import { STRIPE_PLANS, type SubscriptionPlan } from "@/lib/stripe"
 import { z } from "zod"
 
 const updateSubscriptionSchema = z.object({

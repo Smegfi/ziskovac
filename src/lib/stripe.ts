@@ -57,6 +57,7 @@ export const STRIPE_PLANS = {
     description: "Perfect for getting started",
     monthlyPrice: 0,
     annualPrice: 0,
+    stripePriceId: null as string | null,
     features: [
       "Basic quote calculator",
       "Up to 5 quotes per month",
@@ -68,7 +69,7 @@ export const STRIPE_PLANS = {
     description: "For active freelancers",
     monthlyPrice: 29,
     annualPrice: 290, // 10 months for annual
-    stripePriceId: process.env.STRIPE_MONTHLY_PRICE_ID,
+    stripePriceId: process.env.STRIPE_MONTHLY_PRICE_ID || null,
     features: [
       "Unlimited quotes",
       "Advanced calculations",
@@ -82,7 +83,7 @@ export const STRIPE_PLANS = {
     description: "Save 2 months with annual billing",
     monthlyPrice: 0,
     annualPrice: 290,
-    stripePriceId: process.env.STRIPE_ANNUAL_PRICE_ID,
+    stripePriceId: process.env.STRIPE_ANNUAL_PRICE_ID || null,
     features: [
       "Everything in Monthly",
       "Save 2 months of billing",

@@ -20,7 +20,7 @@ export function SubscriptionSelector({ currentPlan = "free", onSelectPlan, loadi
     description: string
     price: number
     period: string
-    features: string[]
+    features: readonly string[]
     highlighted?: boolean
   }> = [
     {

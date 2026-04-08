@@ -1,6 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router"
 import { useEffect, useState } from "react"
-import { useTranslation } from "react-i18next"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -25,9 +24,9 @@ interface Quote {
 }
 
 function QuoteDetailPage() {
-  const { t } = useTranslation()
   const navigate = useNavigate()
-  const { id } = Route.useParams()
+  const params = Route.useParams() as { id: string }
+  const id = params.id
 
   const [quote, setQuote] = useState<Quote | null>(null)
   const [lineItems, setLineItems] = useState<LineItem[]>([])
@@ -223,7 +222,7 @@ function QuoteDetailPage() {
         </CardContent>
       </Card>
 
-      <QuoteLineItemForm quoteId={id} onSubmit={handleAddLineItem} />
+      <QuoteLineItemForm onSubmit={handleAddLineItem} />
 
       <QuoteLineItemTable
         lineItems={lineItems}

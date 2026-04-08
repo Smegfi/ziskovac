@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router"
 import { db } from "@/lib/db"
-import { eq } from "drizzle-orm"
 import * as schema from "@/lib/schema"
 import { verifyWebhookSignature, handleStripeWebhookEvent } from "@/lib/stripe"
 

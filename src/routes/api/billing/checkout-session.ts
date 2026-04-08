@@ -55,9 +55,7 @@ export const Route = createFileRoute("/api/billing/checkout-session")({
 
           if (!customerId) {
             // Create customer in Stripe
-            const user = await auth.api.getUser({ userId })
             const customer = await stripe.customers.create({
-              email: user?.email,
               metadata: {
                 userId,
               },
