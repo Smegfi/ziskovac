@@ -16,6 +16,14 @@ const config = defineConfig({
     tailwindcss(),
     viteReact(),
   ],
+  build: {
+    rollupOptions: {
+      external: ["postgres", "drizzle-orm/postgres-js"],
+    },
+  },
+  optimizeDeps: {
+    exclude: ["postgres", "drizzle-orm/postgres-js"],
+  },
 })
 
 export default config

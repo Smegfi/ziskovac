@@ -378,7 +378,7 @@ function OverheadPage() {
                   </div>
                   <div className="flex items-center gap-3">
                     <div className="text-right">
-                      <p className="font-bold">{cost.amount.toFixed(0)} CZK</p>
+                      <p className="font-bold">{Number(cost.amount).toFixed(0)} CZK</p>
                       <p className="text-xs text-gray-600">{cost.isFixed ? "Fixed" : "Variable"}</p>
                     </div>
                     <Button
