@@ -310,7 +310,7 @@ function QuotesPage() {
                   <CardTitle className="text-sm">Calculated Results</CardTitle>
                   <CardDescription>Updates in real-time as you edit inputs</CardDescription>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="space-y-6">
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                     <div>
                       <p className="text-xs text-muted-foreground">Floor Hourly Rate</p>
@@ -331,6 +331,41 @@ function QuotesPage() {
                     <div>
                       <p className="text-xs text-muted-foreground">Actual Margin</p>
                       <p className="text-xl font-bold text-indigo-600">{calculations.actualMarginPercent}%</p>
+                    </div>
+                  </div>
+
+                  {/* Margin and Profit Overlay */}
+                  <div className="border-t pt-4 space-y-4">
+                    <h4 className="font-semibold text-sm">Margin & Profit Overlay</h4>
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between p-3 bg-gray-50 rounded">
+                        <div>
+                          <p className="text-xs text-muted-foreground">Floor Hourly Rate</p>
+                          <p className="text-sm font-medium">Minimum rate to break even</p>
+                        </div>
+                        <p className="text-lg font-bold text-blue-600">{calculations.floorHourlyRate} CZK/h</p>
+                      </div>
+
+                      <div className="flex items-center justify-between p-3 bg-blue-50 rounded border border-blue-200">
+                        <div>
+                          <p className="text-xs text-muted-foreground">With {formData.targetMarginPercent || 30}% Margin</p>
+                          <p className="text-sm font-medium">Recommended hourly rate for target profit</p>
+                        </div>
+                        <p className="text-lg font-bold text-green-600">
+                          {Math.ceil((calculations.floorHourlyRate * (1 + (formData.targetMarginPercent || 30) / 100)) * 100) / 100} CZK/h
+                        </p>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="p-3 bg-amber-50 rounded border border-amber-200">
+                          <p className="text-xs text-muted-foreground">Target Monthly Profit</p>
+                          <p className="text-lg font-bold text-amber-600">{calculations.netProfit} CZK</p>
+                        </div>
+                        <div className="p-3 bg-purple-50 rounded border border-purple-200">
+                          <p className="text-xs text-muted-foreground">Profit Margin</p>
+                          <p className="text-lg font-bold text-purple-600">{calculations.actualMarginPercent}%</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </CardContent>
